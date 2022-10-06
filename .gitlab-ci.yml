@@ -24,8 +24,6 @@ build:
 
 deploy:
   stage: deploy
-  tags:
-    - shell
   script:
     - sh publish.sh
   only:
