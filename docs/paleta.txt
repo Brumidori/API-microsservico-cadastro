@@ -1,0 +1,19 @@
+rosa #F7CBAC #000000
+azul pastel #B4C6E7 #000000
+verde pastel #C5E0B3 #000000
+perola #FEE599 #000000
+ciano #0099FF #000000
+pink #FF66FF #000000
+
+verde escuro #375623 #FFFFFF
+marrom #7F6000 #FFFFFF
+cinza #7F7F7F #FFFFFF
+roxo #7030A0 #FFFFFF
+
+preto #000000
+branco #FFFFFF
+
+vermelho #FF0000
+amarelo #FFFF00
+verde #00B050
+azul #0070C0

@@ -1,0 +1,74 @@
+Usuario
+-id
+-email
+-senha
+-tipo ADM,COLABORADOR
+
+Projeto
+-nome
+-cor
+Usuario gestor
+<Usuario> proficionais
+<Start> starts
+
+Start
+-mesAno(data)
+Usuario start
+Entrevista entrevista
+<Avaliacao> avaliacoes
+
+
+Entrevista
+-data
+-parecer
+-notasJson
+	-tipo valor
+01. Histórico (Profissional, Cursos, Graduação)
+02. Área de interesse 
+03. Nível de contato com a área de tecnologia
+04. Proatividade
+05. Comunicação
+06. Contato com Metodologia Ágil
+07. Evolução pós curso
+08. Quais pontos fortes e de melhoria.
+09. Organização e planejamento
+10. Disponibilidade hora extra
+11. Rotina
+12. Infra home office
+
+
+01 - Capacidade Analítica
+02 - SCRUM
+03 - Controle de Versão - GIT (Branches / PR / MR)
+04 - Banco de dados - SQL
+05 - JSON / XML
+06 - Desenvolvimento de API's - Métodos HTTP / Endpoints / Serviços
+07 - JAVA 8+ - (JAX-RS / Spring Boot / Open liberty)
+08 - NodeJS - (TypeScript)
+09 - Angular - Componentização (TypeScript + Semantica HTML)
+10 - Testes Unitários (JUnit + Mockito / Jest + Mocha)
+
+
+Avaliacao
+-semana(data)
+-farol VERMELHO,AMARELO,VERDE,AZUL
+-texto
+
+INSERT INTO turma (nome) VALUES
+('junho'),
+('julho'),
+('agosto');
+
+INSERT INTO gestor (id, email, nome, permissao, cor) VALUES
+(NEXTVAL('hibernate_sequence'), 'maria@gmail.com', 'Maria Gestora', 'LEITURA_ESCRITA', 'ROSA'),
+(NEXTVAL('hibernate_sequence'), 'carlos@gmail.com', 'Carlos Gestor', 'LEITURA_ESCRITA', 'AZUL_PASTEL');
+
+INSERT INTO coach (id, email, nome, permissao, atuacao, id_gestor) VALUES
+(usuario_key_generator.NEXTVAL, 'paulo@gmail.com', 'Paulo Coach', 'LEITURA_ESCRITA', 'BACK_END', 1),
+(usuario_key_generator.NEXTVAL, 'pedro@gmail.com', 'Pedro Coach', 'LEITURA_ESCRITA', 'BACK_END', 2),
+(usuario_key_generator.NEXTVAL, 'flavia@gmail.com', 'Flavia Coach', 'LEITURA_ESCRITA', 'BACK_END', 2);
+
+INSERT INTO m_start (id, email, nome, permissao, atuacao, id_coach, id_gestor, id_turma) VALUES
+(usuario_key_generator.NEXTVAL, 'prisciala@gmail.com', 'Priscila', 'LEITURA', 'BACK_END', 3, 1, 151),
+(usuario_key_generator.NEXTVAL, 'bia@gmail.com', 'Bia', 'LEITURA', 'BACK_END', 3, 1, 151),
+(usuario_key_generator.NEXTVAL, 'joao@gmail.com', 'João', 'LEITURA', 'BACK_END', 4, 51, 201);
