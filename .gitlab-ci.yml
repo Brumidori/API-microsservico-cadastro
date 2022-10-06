@@ -1,0 +1,32 @@
+image:
+  docker:latest
+
+services:
+  - docker:dind
+
+stages:
+  - build
+  - deploy
+
+before_script:
+  - chmod 777 -R .
+build:
+  image: maven:3.6.3-jdk-8
+  stage: build
+  script:
+    - sh build.sh
+  artifacts:
+    paths:
+      - devops/*
+  only:
+    - develop
+
+
+deploy:
+  stage: deploy
+  tags:
+    - shell
+  script:
+    - sh publish.sh
+  only:
+    - develop
