@@ -27,6 +27,9 @@ public class EntrevistaNegocioController {
 	
 	@Autowired
 	private EntrevistaNegocioService service;
+	
+	@Autowired
+	private StartController startController;
 
 	private ModelAndView form(EntrevistaNegocioForm form, String sucesso, String erro) {
 		return new ModelAndView(FUNCIONALIDADE + "/form")
@@ -58,6 +61,6 @@ public class EntrevistaNegocioController {
 		
 		service.salvar(form);
 		
-		return form(form, "Entrevista salva com sucesso", null);
+		return startController.formLista("Entrevista salva com sucesso", null);
 	}
 }

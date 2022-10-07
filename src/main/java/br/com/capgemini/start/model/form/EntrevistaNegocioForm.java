@@ -2,7 +2,6 @@ package br.com.capgemini.start.model.form;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -30,7 +29,8 @@ public class EntrevistaNegocioForm implements Serializable {
 	@NotNull(message = Validacao.NOT_NULL)
 	private Long idStart;
 	
-	@Column(nullable= false, length = 500)
+	@NotBlank(message = Validacao.NOT_NULL)
+	@Size(max=500, message = Validacao.SIZE_MAX_500)
 	private String parecer;
 	
 	@NotNull(message = Validacao.NOT_NULL)
