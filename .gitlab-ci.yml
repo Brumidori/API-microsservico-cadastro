@@ -24,8 +24,6 @@ build:
 
 deploy:
   stage: deploy
-  tags:
-    - cadastro-starters
   script:
     - sh deploy.sh
   only:

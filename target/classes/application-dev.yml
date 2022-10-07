@@ -1,0 +1,23 @@
+server:
+  port: 80
+
+
+spring:
+  profile: dev
+  thymeleaf:
+    cache: false
+  application:
+    name: cadastro-starters
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+  jmx:
+    enabled: false
+  datasource:
+    url: jdbc:mysql://18.191.22.151:3306/start_db?allowPublicKeyRetrieval=true&sslModel=DISABLED&useSSL=false
+    username: root
+    password: mauFJcuf5dhRMQrjj
