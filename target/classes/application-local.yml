@@ -2,18 +2,24 @@ server:
   port: 80
 
 spring:
+  thymeleaf:
+    mode: html
+    cache: false
+  datasource:
+    username: sa
+    url: jdbc:h2:mem:start_db;DATABASE_TO_UPPER=false;DB_CLOSE_DELAY=-1
+    driverClassName: org.h2.Driver
+    password: ricardo
   h2:
     console:
-      enabled: true
+      enabled: 'true'
       path: /h2-console
-  datasource:
-    url: jdbc:h2:mem:start_db;DATABASE_TO_UPPER=false;DB_CLOSE_DELAY=-1
-    username: sa
-    password: ricardo
-    driverClassName: org.h2.Driver
   jpa:
-    defer-datasource-initialization: true
+    database-platform: org.hibernate.dialect.H2Dialect
     properties:
       hibernate:
-        format_sql=false:
-    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+        format_sql: 'false'
+    defer-datasource-initialization: 'true'
+    hibernate:
+      ddl-auto: update
+    show-sql: 'true'
