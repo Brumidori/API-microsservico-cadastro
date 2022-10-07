@@ -1,12 +1,12 @@
 echo "Parando os contaienrs"
 
-docker-compose -f devops/docker-compose.yml down
+docker-compose -f docker-compose.yml down
 
 echo "removendo as imagens docker"
-docker rmi -f auth:latest
+docker rmi -f  19031988/cadastro-starters:latest
 
 echo "removendo container"
-docker rm -f auth
+docker rm -f  19031988/cadastro-starters:latest
 
 echo "executando docker-compose"
-docker-compose -f devops/docker-compose.yml up -d
+docker-compose -f docker-compose.yml up -d
