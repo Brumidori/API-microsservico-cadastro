@@ -15,9 +15,6 @@ build:
   stage: build
   script:
     - sh build.sh
-  artifacts:
-    paths:
-      - devops/*
   only:
     - develop
 

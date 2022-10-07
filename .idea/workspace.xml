@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7705c7f0-45da-4c46-a292-8055ebdf29cb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitlab-ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.gitlab-ci.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,13 +51,20 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "spring.configuration.checksum": "c82a57cb43467a1bc98b5f379ae44559"
+    "spring.configuration.checksum": "2f84e95da5fc2e0097b2481421f50a9d"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\arabello\OneDrive - Capgemini\Desktop\cadastro-de-starts\src\main\resources" />
     </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
   </component>
   <component name="RunManager" selected="Spring Boot.Application">
     <configuration name="Application (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
@@ -87,6 +95,7 @@
       <workItem from="1665102599113" duration="876000" />
       <workItem from="1665103509317" duration="3560000" />
       <workItem from="1665152142909" duration="2121000" />
+      <workItem from="1665166369311" duration="412000" />
     </task>
     <servers />
   </component>
