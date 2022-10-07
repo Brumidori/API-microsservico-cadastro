@@ -6,7 +6,7 @@ services:
 
 stages:
   - build
-  - deploy
+  - publish
 
 before_script:
   - chmod 777 -R .
@@ -22,9 +22,21 @@ build:
     - develop
 
 
-deploy:
-  stage: deploy
+publish:
+  only: [develop]
+  needs: ["build"]
+  stage: publish
+  image: docker
+  services:
+    - docker:dind
+  variables:
+    DOCKER_TLS_CERTDIR: ""
+  before_script:
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
   script:
-    - sh deploy.sh
-  only:
-    - develop
+    - docker  build -t $CI_REGISTRY_IMAGE .
+    - docker image ls
+    - docker push $CI_REGISTRY_IMAGE
+
+
+

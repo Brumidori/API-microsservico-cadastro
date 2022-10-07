@@ -5,10 +5,6 @@ e
 5src/main/java/br/com/capgemini/start/Application.java,2\9\290cf4b37d881cae5b84ef73fba51f769f8e69da
 >
 aws-connect.sh,6\7\6767df84e1361073b05ca9dd736382ac9692c47e
-8
-build.sh,5\9\59f81c123b3abbcb97274545796dd18706c3e106
-B
-docker-compose.yml,3\5\35b8c13cf2eb2a194eada000eb310d65aed53b2a
 :
 
 publish.sh,d\6\d68a3cecebf24f788b3b663f3864e588df6b1d0a
