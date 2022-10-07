@@ -72,6 +72,18 @@ public class StartController {
 				.addObject("usuario", Usuario.usuarioLogado());
 	}
 	
+	public ModelAndView formLista(String sucesso, String erro) {
+		ListaStartForm form = new ListaStartForm();
+		
+		return new ModelAndView(FUNCIONALIDADE + "/lista")
+				.addObject("form", form)
+				.addObject("lista", service.listar(form))
+				.addObject("atuacoes", Atuacao.values())
+				.addObject("sucesso", sucesso)
+				.addObject("erro", erro)
+				.addObject("usuario", Usuario.usuarioLogado());
+	}
+	
 	private StartForm model() {
 		StartForm model = new StartForm();
 		model.setDataCadastro(LocalDate.now());
