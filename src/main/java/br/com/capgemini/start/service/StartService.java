@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
@@ -13,15 +14,21 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.capgemini.start.exception.ErroInternoException;
+import br.com.capgemini.start.model.Avaliacao;
 import br.com.capgemini.start.model.Farol;
 import br.com.capgemini.start.model.Permissao;
 import br.com.capgemini.start.model.Start;
+import br.com.capgemini.start.model.dto.AvaliacaoDto;
 import br.com.capgemini.start.model.dto.CoachDto;
+import br.com.capgemini.start.model.dto.EntrevistaNegocioDto;
+import br.com.capgemini.start.model.dto.EntrevistaTecnicaDto;
 import br.com.capgemini.start.model.dto.GestorDto;
 import br.com.capgemini.start.model.dto.StartDto;
+import br.com.capgemini.start.model.dto.StartRelatorioDto;
 import br.com.capgemini.start.model.dto.TurmaDto;
 import br.com.capgemini.start.model.form.ListaStartForm;
 import br.com.capgemini.start.model.form.StartForm;
+import br.com.capgemini.start.repository.AvaliacaoRepository;
 import br.com.capgemini.start.repository.CoachRepository;
 import br.com.capgemini.start.repository.EntrevistaNegocioRepository;
 import br.com.capgemini.start.repository.EntrevistaTecnicaRepository;
@@ -54,6 +61,9 @@ public class StartService {
 	
 	@Autowired
 	private TurmaRepository turmaRepository;
+	
+	@Autowired
+	private AvaliacaoRepository avaliacaoRepository;
 	
 	@Autowired
 	private ModelMapper mapper;
@@ -162,6 +172,16 @@ public class StartService {
 			dto.setFezEntrevistaTecnica(true);
 		} else {
 			dto.setFarolEntrevistaTecnica(Farol.BRANCO);
+		}	
+		
+		if(start.getUltimaAvaliacao() != null) {
+			dto.setFarolUltimaAvaliacao(start.getUltimaAvaliacao().getFarol());
+			dto.setParecerUltimaAvaliacao(start.getUltimaAvaliacao().getParecer());
+			dto.setDataUltimaAvaliacao(start.getUltimaAvaliacao().getData());
+			dto.setFezAvaliacao(true);
+			dto.setFezAvaliacaoNoDia(LocalDate.now().equals(start.getUltimaAvaliacao().getData()));
+		} else {
+			dto.setFarolUltimaAvaliacao(Farol.BRANCO);
 		}
 		
 		if(start.getCoach() != null) {
@@ -173,6 +193,29 @@ public class StartService {
 		
 		dto.setCor(gestor.getCor());
 		
+		dto.setTurma(mapper.map(start.getTurma(), TurmaDto.class));
+		
+		return dto;
+	}
+	
+	public StartRelatorioDto relatorio(Long id) {
+		Start start = repository.findById(id).orElseThrow(()-> new ErroInternoException("Start não encontrado na geração do Start Relatório"));
+		
+		StartRelatorioDto dto =  mapper.map(start, StartRelatorioDto.class);
+		
+		List<Avaliacao> avaliacoes = avaliacaoRepository.findByIdStart(id, Sort.by(Sort.Direction.ASC, "data"));
+		dto.setAvaliacoes(mapper.map(avaliacoes, new TypeToken<List<AvaliacaoDto>>() {}.getType()));
+		
+		if(start.getEntrevistaNegocio() != null) {
+			dto.setEntrevistaNegocio(mapper.map(start.getEntrevistaNegocio(), EntrevistaNegocioDto.class));
+		}
+		if(start.getEntrevistaTecnica() != null) {
+			dto.setEntrevistaTecnica(mapper.map(start.getEntrevistaTecnica(), EntrevistaTecnicaDto.class));
+		}
+		if(start.getCoach() != null) {
+			dto.setCoach(mapper.map(start.getCoach(), CoachDto.class));
+		}
+		dto.setGestor(mapper.map(start.getGestor(), GestorDto.class));
 		dto.setTurma(mapper.map(start.getTurma(), TurmaDto.class));
 		
 		return dto;

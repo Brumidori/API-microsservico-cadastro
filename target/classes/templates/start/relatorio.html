@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no" charset="utf-8">
+<title>Start</title>
+<link href="/imagens/logo_pp.png" rel="icon" type="image/x-icon" />
+
+<link href="/css/main.css" rel="stylesheet" />
+
+<!-- WEBJARS -->
+<script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+
+</head>
+<body class="bg-light">
+	<!-- Barra de Menu -->
+	<section th:insert="barra_de_menu :: barra_de_menu"></section>
+
+	<section class="container">
+		<div class="shadow-sm rounded mt-4 mb-2 p-2">
+			<div class="row justify-content-md-center">
+				<div class="col-12">
+					<h5 class="text-center font-weight-bold" th:text="${relatorio.nome}"></h5>
+				</div>
+				
+				<div class="col-7 mt-2">
+					<table class="table table-hover table-striped table-sm w-100">
+						<tr>
+							<td class="text-left align-middle">E-mail:</td>
+							<td class="text-left align-middle font-weight-bold" th:text="${relatorio.email}"/>
+						</tr>
+						
+						<tr>
+							<td class="text-left align-middle">Turma:</td>
+							<td class="text-left align-middle font-weight-bold" th:text="${relatorio.turma.nome}"/>
+						</tr>
+		
+						<tr>
+							<td class="text-left align-middle">Atuação:</td>
+							<td class="text-left align-middle font-weight-bold" th:text="${relatorio.atuacao.imprime}"/>
+						</tr>
+						
+						<tr>
+							<td class="text-left align-middle">Data de Cadastro:</td>
+							<td class="text-left align-middle font-weight-bold" th:text="${#temporals.format(relatorio.dataCadastro, 'dd/MM/yyyy')}"/>
+						</tr>
+						
+						<tr>
+							<td class="text-left align-middle">Gestor:</td>
+							<td class="text-left align-middle font-weight-bold" th:text="${relatorio.gestor.nome}"/>
+						</tr>
+							
+						<tr th:if="${relatorio.coach != null}" class="col-12">
+							<td class="text-left align-middle">Coach:</td>
+							<td class="text-left align-middle font-weight-bold" th:text="${relatorio.coach.nome}"/>
+						</tr>			
+						
+						<tr>
+							<td class="text-left align-middle">Billable:</td>
+							<td th:if="${relatorio.billable}" >
+								<label class="bg-primary text-white redondo">&nbsp&nbspSim&nbsp&nbsp</label>
+							</td>
+							<td th:if="${!relatorio.billable}" class="text-left align-middle font-weight-bold">não</td>
+						</tr>
+					</table>
+				</div>
+				
+				<div class="col-7 mt-2">
+					<table class="table table-hover table-striped table-sm w-100">
+						<thead class="thead-dark">
+							<tr>
+								<th class="text-left font-weight-normal" scope="col">Parecer</th>
+								<th class="text-center font-weight-normal" scope="col">Data</th>
+								<th scope="col" />
+							</tr>
+						</thead>
+						
+						<tbody>
+							<tr th:each="item : ${relatorio.avaliacoes}">
+								<td class="text-left align-middle" th:text="${item.parecer}" scope="row" />
+								<td class="text-center align-middle" th:text="${#temporals.format(item.data, 'dd/MM/yyyy')}" scope="row" />
+								<td class="text-center align-middle" scope="row">
+									<label class="m-0 main-font-9 redondo" th:title="${item.farol.mensagem}" th:text="${'&nbsp&nbsp' + item.farol.valor + '&nbsp&nbsp'}" 
+											th:style="${'background-color:'+item.farol.corFundo+';color:'+item.farol.corFonte+';'}"></label>
+								</td>
+							</tr>
+						</tbody>
+					</table>					
+				</div>
+			</div>
+		
+
+			<div th:if="${relatorio.entrevistaTecnica != null}" class="row mt-3">
+				<div class="col-12 text-center">
+					<h5>Entrevista Técnica</h5>
+					<span th:text="${relatorio.entrevistaTecnica.parecer}"></span>
+				</div>
+	
+				<div class="col-12 mt-1">
+					<table class="table table-sm">
+						<tbody>
+							<tr>
+								<th scope="row">1</th>
+								<td>Capacidade Analítica</td>
+								<td>
+									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaTecnica.p01.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaTecnica.p01.valor + '&nbsp&nbsp'}" 
+											th:style="${'background-color:'+relatorio.entrevistaTecnica.p01.corFundo+';color:'+relatorio.entrevistaTecnica.p01.corFonte+';'}"></label>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">2</th>
+								<td>SCRUM</td>
+								<td>
+									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaTecnica.p02.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaTecnica.p02.valor + '&nbsp&nbsp'}" 
+											th:style="${'background-color:'+relatorio.entrevistaTecnica.p02.corFundo+';color:'+relatorio.entrevistaTecnica.p02.corFonte+';'}"></label>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">3</th>
+								<td>Controle de Versão - GIT (Branches / PR / MR)</td>
+								<td>
+									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaTecnica.p03.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaTecnica.p03.valor + '&nbsp&nbsp'}" 
+											th:style="${'background-color:'+relatorio.entrevistaTecnica.p03.corFundo+';color:'+relatorio.entrevistaTecnica.p03.corFonte+';'}"></label>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">4</th>
+								<td>Banco de dados - SQL</td>
+								<td>
+									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaTecnica.p04.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaTecnica.p04.valor + '&nbsp&nbsp'}" 
+											th:style="${'background-color:'+relatorio.entrevistaTecnica.p04.corFundo+';color:'+relatorio.entrevistaTecnica.p04.corFonte+';'}"></label>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">5</th>
+								<td>JSON / XML</td>
+								<td>
+									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaTecnica.p05.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaTecnica.p05.valor + '&nbsp&nbsp'}" 
+											th:style="${'background-color:'+relatorio.entrevistaTecnica.p05.corFundo+';color:'+relatorio.entrevistaTecnica.p05.corFonte+';'}"></label>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">6</th>
+								<td>Desenvolvimento de API's - Métodos HTTP / Endpoints / Serviços</td>
+								<td>
+									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaTecnica.p06.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaTecnica.p06.valor + '&nbsp&nbsp'}" 
+											th:style="${'background-color:'+relatorio.entrevistaTecnica.p06.corFundo+';color:'+relatorio.entrevistaTecnica.p06.corFonte+';'}"></label>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">7</th>
+								<td>JAVA 8+ - (JAX-RS / Spring Boot / Open liberty)</td>
+								<td>
+									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaTecnica.p07.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaTecnica.p07.valor + '&nbsp&nbsp'}" 
+											th:style="${'background-color:'+relatorio.entrevistaTecnica.p07.corFundo+';color:'+relatorio.entrevistaTecnica.p07.corFonte+';'}"></label>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">8</th>
+								<td>NodeJS - (TypeScript)</td>
+								<td>
+									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaTecnica.p08.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaTecnica.p08.valor + '&nbsp&nbsp'}" 
+											th:style="${'background-color:'+relatorio.entrevistaTecnica.p08.corFundo+';color:'+relatorio.entrevistaTecnica.p08.corFonte+';'}"></label>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">9</th>
+								<td>Angular - Componentização (TypeScript + Semantica HTML)</td>
+								<td>
+									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaTecnica.p09.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaTecnica.p09.valor + '&nbsp&nbsp'}" 
+											th:style="${'background-color:'+relatorio.entrevistaTecnica.p09.corFundo+';color:'+relatorio.entrevistaTecnica.p09.corFonte+';'}"></label>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">10</th>
+								<td>Testes Unitários (JUnit + Mockito / Jest + Mocha)</td>
+								<td>
+									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaTecnica.p10.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaTecnica.p10.valor + '&nbsp&nbsp'}" 
+											th:style="${'background-color:'+relatorio.entrevistaTecnica.p10.corFundo+';color:'+relatorio.entrevistaTecnica.p10.corFonte+';'}"></label>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<div class="row mt-3">
+				<div class="col-12 text-center">
+					<h5>Entrevista de Negócio</h5>
+					<span th:text="${relatorio.entrevistaNegocio.parecer}"></span>
+				</div>
+
+
+				<div class="col-12 mt-1">
+					<table class="table table-sm">
+						<tbody>
+							<tr>
+								<th scope="row">1</th>
+								<td>Histórico (Profissional, Cursos, Graduação)</td>
+								<td>
+									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaNegocio.p01.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaNegocio.p01.valor + '&nbsp&nbsp'}" 
+											th:style="${'background-color:'+relatorio.entrevistaNegocio.p01.corFundo+';color:'+relatorio.entrevistaNegocio.p01.corFonte+';'}"></label>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">2</th>
+								<td>Área de interesse</td>
+								<td>
+									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaNegocio.p02.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaNegocio.p02.valor + '&nbsp&nbsp'}" 
+											th:style="${'background-color:'+relatorio.entrevistaNegocio.p02.corFundo+';color:'+relatorio.entrevistaNegocio.p02.corFonte+';'}"></label>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">3</th>
+								<td>Nível de contato com a área de tecnologia</td>
+								<td>
+									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaNegocio.p03.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaNegocio.p03.valor + '&nbsp&nbsp'}" 
+											th:style="${'background-color:'+relatorio.entrevistaNegocio.p03.corFundo+';color:'+relatorio.entrevistaNegocio.p03.corFonte+';'}"></label>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">4</th>
+								<td>Proatividade</td>
+								<td>
+									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaNegocio.p04.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaNegocio.p04.valor + '&nbsp&nbsp'}" 
+											th:style="${'background-color:'+relatorio.entrevistaNegocio.p04.corFundo+';color:'+relatorio.entrevistaNegocio.p04.corFonte+';'}"></label>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">5</th>
+								<td>Comunicação</td>
+								<td>
+									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaNegocio.p05.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaNegocio.p05.valor + '&nbsp&nbsp'}" 
+											th:style="${'background-color:'+relatorio.entrevistaNegocio.p05.corFundo+';color:'+relatorio.entrevistaNegocio.p05.corFonte+';'}"></label>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">6</th>
+								<td>Contato com Metodologia Ágil</td>
+								<td>
+									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaNegocio.p06.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaNegocio.p06.valor + '&nbsp&nbsp'}" 
+											th:style="${'background-color:'+relatorio.entrevistaNegocio.p06.corFundo+';color:'+relatorio.entrevistaNegocio.p06.corFonte+';'}"></label>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">7</th>
+								<td>Evolução pós curso</td>
+								<td>
+									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaNegocio.p07.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaNegocio.p07.valor + '&nbsp&nbsp'}" 
+											th:style="${'background-color:'+relatorio.entrevistaNegocio.p07.corFundo+';color:'+relatorio.entrevistaNegocio.p07.corFonte+';'}"></label>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">8</th>
+								<td>Quais pontos fortes e de melhoria</td>
+								<td>
+									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaNegocio.p08.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaNegocio.p08.valor + '&nbsp&nbsp'}" 
+											th:style="${'background-color:'+relatorio.entrevistaNegocio.p08.corFundo+';color:'+relatorio.entrevistaNegocio.p08.corFonte+';'}"></label>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">9</th>
+								<td>Organização e planejamento</td>
+								<td>
+									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaNegocio.p09.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaNegocio.p09.valor + '&nbsp&nbsp'}" 
+											th:style="${'background-color:'+relatorio.entrevistaNegocio.p09.corFundo+';color:'+relatorio.entrevistaNegocio.p09.corFonte+';'}"></label>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">10</th>
+								<td>Disponibilidade hora extra</td>
+								<td>
+									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaNegocio.p10.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaNegocio.p10.valor + '&nbsp&nbsp'}" 
+											th:style="${'background-color:'+relatorio.entrevistaNegocio.p10.corFundo+';color:'+relatorio.entrevistaNegocio.p10.corFonte+';'}"></label>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">11</th>
+								<td>Rotina</td>
+								<td>
+									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaNegocio.p11.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaNegocio.p11.valor + '&nbsp&nbsp'}" 
+											th:style="${'background-color:'+relatorio.entrevistaNegocio.p11.corFundo+';color:'+relatorio.entrevistaNegocio.p11.corFonte+';'}"></label>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">12</th>
+								<td>Infra home office</td>
+								<td>
+									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaNegocio.p12.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaNegocio.p12.valor + '&nbsp&nbsp'}" 
+											th:style="${'background-color:'+relatorio.entrevistaNegocio.p12.corFundo+';color:'+relatorio.entrevistaNegocio.p12.corFonte+';'}"></label>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>			
+		</div>
+		<section th:insert="mensagem :: mensagem"></section>
+	</section>
+
+	<script th:if="${sucesso != null || erro != null || alerta != null}" type="text/javascript">
+		$("#mensagem").modal("show");
+	</script>
+</body>
+</html>

@@ -49,7 +49,7 @@ public class StartSpecification implements SpecificationTemplate <Start>{
 	public StartSpecification nomeCoach(String nomeCoach) {
 		if(StringUtils.isNotBlank(nomeCoach)) {
 			specifications.add((root, criteriaQuery, criteriaBuilder) -> 
-				criteriaBuilder.like(criteriaBuilder.lower(root.get("coach").get("nome")), "%" + nomeCoach + "%"));
+				criteriaBuilder.like(criteriaBuilder.upper(root.get("coach").get("nome")), "%" + nomeCoach.toUpperCase() + "%"));
 		}
 			
 		return this;
@@ -58,7 +58,7 @@ public class StartSpecification implements SpecificationTemplate <Start>{
 	public StartSpecification nomeGestor(String nomeGestor) {
 		if(StringUtils.isNotBlank(nomeGestor)) {
 			specifications.add((root, criteriaQuery, criteriaBuilder) -> 
-				criteriaBuilder.like(criteriaBuilder.lower(root.get("gestor").get("nome")), "%" + nomeGestor + "%"));
+				criteriaBuilder.like(criteriaBuilder.upper(root.get("gestor").get("nome")), "%" + nomeGestor.toUpperCase() + "%"));
 		}
 			
 		return this;

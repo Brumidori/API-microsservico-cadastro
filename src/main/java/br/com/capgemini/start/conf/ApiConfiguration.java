@@ -14,6 +14,7 @@ import br.com.capgemini.start.model.Start;
 import br.com.capgemini.start.model.dto.CoachDto;
 import br.com.capgemini.start.model.dto.GestorDto;
 import br.com.capgemini.start.model.dto.StartDto;
+import br.com.capgemini.start.model.dto.StartRelatorioDto;
 import br.com.capgemini.start.model.form.CoachForm;
 import br.com.capgemini.start.model.form.GestorForm;
 import br.com.capgemini.start.model.form.StartForm;
@@ -65,6 +66,11 @@ public class ApiConfiguration {
 			
 			TypeMap<Start, StartForm> propertyForm2 = mapper.createTypeMap(Start.class, StartForm.class);
 			propertyForm2.addMappings(m -> m.map(Start::getUsername, StartForm::setEmail));
+		}
+		
+		{
+			TypeMap<Start, StartRelatorioDto> propertyDto = mapper.createTypeMap(Start.class, StartRelatorioDto.class);
+			propertyDto.addMappings(m -> m.map(Start::getUsername, StartRelatorioDto::setEmail));
 		}
 		
 		return mapper;

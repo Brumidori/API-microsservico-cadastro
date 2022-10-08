@@ -2,7 +2,6 @@ package br.com.capgemini.start.controller;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -13,14 +12,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.capgemini.start.exception.ViewException;
 import br.com.capgemini.start.model.Atuacao;
+import br.com.capgemini.start.model.Farol;
 import br.com.capgemini.start.model.Usuario;
-import br.com.capgemini.start.model.dto.StartDto;
+import br.com.capgemini.start.model.dto.StartRelatorioDto;
 import br.com.capgemini.start.model.form.ListaStartForm;
 import br.com.capgemini.start.model.form.StartForm;
 import br.com.capgemini.start.service.CoachService;
@@ -62,11 +63,12 @@ public class StartController {
 				.addObject("usuario", Usuario.usuarioLogado());
 	}
 	
-	private ModelAndView formLista(ListaStartForm form, List<StartDto> lista, String sucesso, String erro) {
+	public ModelAndView formLista(ListaStartForm form, String sucesso, String erro) {
 		return new ModelAndView(FUNCIONALIDADE + "/lista")
 				.addObject("form", form)
-				.addObject("lista", lista)
+				.addObject("lista", service.listar(form))
 				.addObject("atuacoes", Atuacao.values())
+				.addObject("farois", Farol.valores())
 				.addObject("sucesso", sucesso)
 				.addObject("erro", erro)
 				.addObject("usuario", Usuario.usuarioLogado());
@@ -115,10 +117,19 @@ public class StartController {
 	public ModelAndView excluir(@RequestParam("id") Long id) {
 		try {
 			service.excluir(id);
-			return formLista(new ListaStartForm(), service.listar(), "Start excluído com sucesso", null);
+			return formLista(new ListaStartForm(), "Start excluído com sucesso", null);
 		} catch (ViewException e) {
-			return formLista(new ListaStartForm(), service.listar(), null, "Start não pode ser excluído, motivo(s): "+e.getErro());
+			return formLista(new ListaStartForm(), null, "Start não pode ser excluído, motivo(s): "+e.getErro());
 		}
+	}
+
+	@RequestMapping(value="listar", method= {RequestMethod.GET, RequestMethod.POST})
+	@Transactional
+	public ModelAndView listar(@ModelAttribute("form") ListaStartForm form, BindingResult result) {
+		if(result.hasErrors()) {
+			return formLista(form, null, "Erro ao criar a lista");
+		}
+		return formLista(form, null, null);
 	}
 	
 	@GetMapping("billable")
@@ -126,15 +137,16 @@ public class StartController {
 	public ModelAndView billable(@RequestParam(value="id") Long id) {
 		String nome = service.billable(id);
 		
-		return formLista(new ListaStartForm(), service.listar(), nome + " tornado billable com sucesso", null);
+		return formLista(new ListaStartForm(), nome + " tornado billable com sucesso", null);
 	}
-
-	@GetMapping("listar")
+	
+	@GetMapping("relatorio")
 	@Transactional
-	public ModelAndView listar(@ModelAttribute("form") ListaStartForm form, BindingResult result) {
-		if(result.hasErrors()) {
-			return formLista(form, service.listar(form), null, "Erro ao criar a lista");
-		}
-		return formLista(form, service.listar(form), null, null);
+	public ModelAndView relatorio(@RequestParam(value="id") Long id) {
+		StartRelatorioDto relatorio = service.relatorio(id);
+		
+		return new ModelAndView(FUNCIONALIDADE + "/relatorio")
+				.addObject("relatorio", relatorio)
+				.addObject("usuario", Usuario.usuarioLogado());
 	}
 }

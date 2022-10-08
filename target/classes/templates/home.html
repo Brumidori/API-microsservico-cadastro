@@ -31,6 +31,7 @@
 							<th class="text-center font-weight-normal" scope="col">Agendamento</th>
 							<th class="text-center font-weight-normal" scope="col">Tempo de Agendamento</th>
 							<th class="text-center font-weight-normal" scope="col" />
+							<th class="text-center font-weight-normal" scope="col" />
 						</tr>
 					</thead>
 		
@@ -43,6 +44,9 @@
 							<td class="text-center align-middle" scope="row">
 								<a th:if="${usuario.nome.equals(item.coach.nome)}" class="btn btn-warning btn-sm" th:href="${item.link}">Abrir</a>
 							</td>
+							<td class="text-center align-middle" scope="row">
+								<a th:if="${usuario.hasAnyRole('ROLE_EDITAR')}" class="btn btn btn-danger btn-sm" th:href="${item.linkExcluir}">Excluir</a>
+							</td>							
 						</tr>
 					</tbody>
 				</table>
@@ -62,6 +66,7 @@
 							<th class="text-center font-weight-normal" scope="col">Agendamento</th>
 							<th class="text-center font-weight-normal" scope="col">Tempo de Agendamento</th>
 							<th class="text-center font-weight-normal" scope="col" />
+							<th class="text-center font-weight-normal" scope="col" />
 						</tr>
 					</thead>
 		
@@ -73,6 +78,9 @@
 							<td class="text-center align-middle" th:text="${item.mensagemDataHora()}" scope="row" />
 							<td class="text-center align-middle" scope="row">
 								<a th:if="${usuario.nome.equals(item.coach.nome)}" class="btn btn-warning btn-sm" th:href="${item.link}">Abrir</a>
+							</td>
+							<td class="text-center align-middle" scope="row">
+								<a th:if="${usuario.hasAnyRole('ROLE_EDITAR')}" class="btn btn btn-danger btn-sm" th:href="${item.linkExcluir}">Excluir</a>
 							</td>
 						</tr>
 					</tbody>

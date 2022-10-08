@@ -1,7 +1,5 @@
 package br.com.capgemini.start.controller;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -17,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.capgemini.start.exception.ViewException;
 import br.com.capgemini.start.model.Usuario;
-import br.com.capgemini.start.model.dto.AgendamentoDto;
 import br.com.capgemini.start.model.form.AgendamentoEntrevistaForm;
 import br.com.capgemini.start.service.AgendamentoService;
 import br.com.capgemini.start.service.CoachService;
@@ -32,20 +29,15 @@ public class AgendamentoController {
 	private AgendamentoService service;
 	
 	@Autowired
+	private HomeController homeController;
+	
+	@Autowired
 	private CoachService coachService;
 
 	private ModelAndView form(AgendamentoEntrevistaForm form, String sucesso, String erro, String nomeForm) {
 		return new ModelAndView(FUNCIONALIDADE + "/" + nomeForm)
 				.addObject("form", form)
 				.addObject("coachs", coachService.listar())
-				.addObject("sucesso", sucesso)
-				.addObject("erro", erro)
-				.addObject("usuario", Usuario.usuarioLogado());
-	}
-	
-	private ModelAndView formLista(List<AgendamentoDto> lista, String sucesso, String erro) {
-		return new ModelAndView(FUNCIONALIDADE + "/lista")
-				.addObject("lista", lista)
 				.addObject("sucesso", sucesso)
 				.addObject("erro", erro)
 				.addObject("usuario", Usuario.usuarioLogado());
@@ -91,20 +83,14 @@ public class AgendamentoController {
 		return form(new AgendamentoEntrevistaForm(), "Agendamento salvo com sucesso", null, "form_entrevista_tecnica");
 	}
 
-	//@GetMapping("excluir")
+	@GetMapping("excluir")
 	@Transactional
 	public ModelAndView excluir(@RequestParam("id") Long id) {
 		try {
 			service.excluir(id);
-			return formLista(service.listarDoUsuarioLogadoProjeto(), "Agendamento excluído com sucesso", null);
+			return homeController.form("Agendamento excluído com sucesso", null);
 		} catch (ViewException e) {
-			return formLista(service.listarDoUsuarioLogadoProjeto(), null, "Agendamento não pode ser excluído, motivo(s): "+e.getErro());
+			return homeController.form(null, "Agendamento não pode ser excluído, motivo(s): "+e.getErro());
 		}
-	}
-
-	@GetMapping("listar")
-	@Transactional
-	public ModelAndView listar() {
-		return formLista(service.listarDoUsuarioLogadoProjeto(), null, null);
 	}
 }

@@ -10,8 +10,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -37,9 +35,8 @@ public class Avaliacao implements Serializable {
 	private Farol farol;
 	
 	@Column(nullable= false, length = 500)
-	private String texto;
+	private String parecer;
 	
-	@JoinColumn(nullable= false, name = "id_start")
-	@ManyToOne
-	private Start start;
+	@Column(nullable= false, name = "id_start")
+	private Long idStart;
 }

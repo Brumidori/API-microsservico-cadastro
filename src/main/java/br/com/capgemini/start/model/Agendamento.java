@@ -5,8 +5,6 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,12 +29,11 @@ public class Agendamento implements Serializable {
 	@Column(nullable= false, length = 200)
 	private String nome;
 	
-	@Column(nullable= false, length = 20)
-	@Enumerated(EnumType.STRING)
-	private TipoAgendamento tipo;
-	
 	@Column(nullable= false, length = 200)
 	private String link;
+	
+	@Column(nullable= false, length = 200, name = "link_excluir")
+	private String linkExcluir;
 	
 	@Column(nullable= false, name = "data_hora")
 	private LocalDateTime dataHora;

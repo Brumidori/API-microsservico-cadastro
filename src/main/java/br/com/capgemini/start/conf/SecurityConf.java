@@ -24,7 +24,6 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 		//http.cors().and().authorizeRequests();
 		
 		http.authorizeRequests()
-			.antMatchers("/coach/rest/listar/gestor/**").permitAll()
 			.anyRequest().authenticated()
 			.and()
 				.formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/")

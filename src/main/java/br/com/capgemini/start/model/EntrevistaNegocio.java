@@ -25,6 +25,7 @@ import lombok.ToString;
 public class EntrevistaNegocio implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	// por simplicidade mesmo is do start
 	@Id
 	private Long id;
 	

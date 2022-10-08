@@ -42,6 +42,10 @@ public class Start extends Usuario {
 	@OneToOne
 	private EntrevistaTecnica entrevistaTecnica;
 	
+	@JoinColumn(name = "ultima_avaliacao")
+	@ManyToOne
+	private Avaliacao ultimaAvaliacao;
+	
 	@JoinColumn(name = "id_coach")
 	@ManyToOne
 	private Coach coach;

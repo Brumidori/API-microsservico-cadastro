@@ -1,7 +1,5 @@
 package br.com.capgemini.start.controller;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -17,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.capgemini.start.exception.ViewException;
 import br.com.capgemini.start.model.Usuario;
-import br.com.capgemini.start.model.dto.TurmaDto;
 import br.com.capgemini.start.model.form.TurmaForm;
 import br.com.capgemini.start.service.TurmaService;
 
@@ -38,9 +35,9 @@ public class TurmaController {
 				.addObject("usuario", Usuario.usuarioLogado());
 	}
 	
-	private ModelAndView formLista(List<TurmaDto> lista, String sucesso, String erro) {
+	private ModelAndView formLista(String sucesso, String erro) {
 		return new ModelAndView(FUNCIONALIDADE + "/lista")
-				.addObject("lista", lista)
+				.addObject("lista", service.listar())
 				.addObject("sucesso", sucesso)
 				.addObject("erro", erro)
 				.addObject("usuario", Usuario.usuarioLogado());
@@ -69,15 +66,15 @@ public class TurmaController {
 	public ModelAndView excluir(@RequestParam("id") Long id) {
 		try {
 			service.excluir(id);
-			return formLista(service.listar(), "Turma excluída com sucesso", null);
+			return formLista("Turma excluída com sucesso", null);
 		} catch (ViewException e) {
-			return formLista(service.listar(), null, "Turma não pode ser excluído, motivo(s): "+e.getErro());
+			return formLista(null, "Turma não pode ser excluído, motivo(s): "+e.getErro());
 		}
 	}
 
 	@GetMapping("listar")
 	@Transactional
 	public ModelAndView listar() {
-		return formLista(service.listar(), null, null);
+		return formLista(null, null);
 	}
 }

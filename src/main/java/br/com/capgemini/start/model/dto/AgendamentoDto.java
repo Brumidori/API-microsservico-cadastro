@@ -3,7 +3,6 @@ package br.com.capgemini.start.model.dto;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import br.com.capgemini.start.model.TipoAgendamento;
 import br.com.capgemini.start.util.Utilits;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,8 +16,8 @@ public class AgendamentoDto implements Serializable {
 
 	private Long id;
 	private String nome;
-	private TipoAgendamento tipo;
 	private String link;
+	private String linkExcluir;
 	private LocalDateTime dataHora;
 	private StartDto start;
 	private CoachDto coach;

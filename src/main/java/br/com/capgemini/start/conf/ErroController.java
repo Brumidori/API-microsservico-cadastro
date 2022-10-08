@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.capgemini.start.exception.ErroInternoException;
+import br.com.capgemini.start.model.Usuario;
 
 @Controller
 public class ErroController implements ErrorController {
@@ -58,6 +59,15 @@ public class ErroController implements ErrorController {
 		
 		return new ModelAndView("erro")
 				.addObject("statusCode", statusCode)
-				.addObject("erros", erros);
+				.addObject("erros", erros)
+				.addObject("usuario", usuarioLogado());
+	}
+
+	private Usuario usuarioLogado() {
+		try {
+			return Usuario.usuarioLogado();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 }

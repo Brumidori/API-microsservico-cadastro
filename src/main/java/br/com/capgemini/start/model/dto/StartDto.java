@@ -34,6 +34,12 @@ public class StartDto implements Serializable {
 	private Farol farolEntrevistaTecnica;
 	private String parecerEntrevistaTecnica;
 	private boolean fezEntrevistaTecnica;
+
+	private Farol farolUltimaAvaliacao;
+	private String parecerUltimaAvaliacao;
+	private LocalDate dataUltimaAvaliacao;
+	private boolean fezAvaliacao;
+	private boolean fezAvaliacaoNoDia;
 	
 	private CoachDto coach;
 	private GestorDto gestor;

@@ -14,20 +14,22 @@ public class HomeController {
 	@Autowired
 	private AgendamentoService service;
 	
-	private ModelAndView form() {
+	public ModelAndView form(String sucesso, String erro) {
 		return new ModelAndView("home")
 				.addObject("agendamentos_todos", service.listarDoUsuarioLogadoTodos())
 				.addObject("agendamentos_projeto", service.listarDoUsuarioLogadoProjeto())
+				.addObject("sucesso", sucesso)
+				.addObject("erro", erro)
 				.addObject("usuario", Usuario.usuarioLogado());
 	}
 	
 	@GetMapping("/")
 	public ModelAndView index() {
-		return form();
+		return form(null, null);
 	}
 
 	@GetMapping("home")
 	public ModelAndView home() {
-		return form();
+		return form(null, null);
 	}
 }

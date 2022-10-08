@@ -15,7 +15,6 @@ import br.com.capgemini.start.model.Agendamento;
 import br.com.capgemini.start.model.Coach;
 import br.com.capgemini.start.model.Gestor;
 import br.com.capgemini.start.model.Permissao;
-import br.com.capgemini.start.model.TipoAgendamento;
 import br.com.capgemini.start.model.Usuario;
 import br.com.capgemini.start.model.dto.AgendamentoDto;
 import br.com.capgemini.start.model.dto.CoachDto;
@@ -47,8 +46,8 @@ public class AgendamentoService {
 	public void salvarNegocio(AgendamentoEntrevistaForm form) {
 		Agendamento agendamento = new Agendamento();
 		agendamento.setNome("Entrevista de Negócio");
-		agendamento.setTipo(TipoAgendamento.MANUAL);
 		agendamento.setLink("xx");
+		agendamento.setLinkExcluir("xx");
 		agendamento.setDataHora(LocalDateTime.now());
 		agendamento.setStart(startRepository.findById(form.getIdStart()).orElseThrow(()-> new ErroInternoException("Start não encontrado ao salvar um Agendamento Entrevista Form")));
 		agendamento.setCoach(coachRepository.findById(form.getIdCoachEntrevista()).orElseThrow(()-> new ErroInternoException("Coach não encontrado ao salvar um Agendamento Entrevista Form")));
@@ -58,14 +57,15 @@ public class AgendamentoService {
 		agendamento = repository.save(agendamento);
 		
 		agendamento.setLink("/entrevista/negocio/agendamento?idStart=" +form.getIdStart()+ "&idCoachEntrevista=" +form.getIdCoachEntrevista() + "&idAgendamento=" +agendamento.getId());
+		agendamento.setLinkExcluir("/agendamento/excluir?id=" +agendamento.getId());
 		repository.save(agendamento);
 	}
 	
 	public void salvarTecnica(AgendamentoEntrevistaForm form) {
 		Agendamento agendamento = new Agendamento();
 		agendamento.setNome("Entrevista de Negócio");
-		agendamento.setTipo(TipoAgendamento.MANUAL);
 		agendamento.setLink("xx");
+		agendamento.setLinkExcluir("xx");
 		agendamento.setDataHora(LocalDateTime.now());
 		agendamento.setStart(startRepository.findById(form.getIdStart()).orElseThrow(()-> new ErroInternoException("Start não encontrado ao salvar um Agendamento")));
 		agendamento.setCoach(coachRepository.findById(form.getIdCoachEntrevista()).orElseThrow(()-> new ErroInternoException("Coach não encontrado ao salvar um Agendamento")));
@@ -75,6 +75,7 @@ public class AgendamentoService {
 		agendamento = repository.save(agendamento);
 		
 		agendamento.setLink("/entrevista/tecnica/agendamento?idStart=" +form.getIdStart()+ "&idCoachEntrevista=" +form.getIdCoachEntrevista() + "&idAgendamento=" +agendamento.getId());
+		agendamento.setLinkExcluir("/agendamento/excluir?id=" +agendamento.getId());
 		repository.save(agendamento);
 	}
 
