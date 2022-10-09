@@ -7,6 +7,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -65,7 +66,7 @@ public class ErroController implements ErrorController {
 
 	private Usuario usuarioLogado() {
 		try {
-			return Usuario.usuarioLogado();
+			return (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		} catch (Exception e) {
 			return null;
 		}

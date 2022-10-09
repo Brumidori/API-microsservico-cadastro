@@ -33,7 +33,7 @@ public class CoachForm implements Serializable {
 	private String nome;
 	
 	@NotNull(message = Validacao.NOT_NULL)
-	private Boolean adm;
+	private boolean adm;
 	
 	@NotNull(message = Validacao.NOT_NULL)
 	private Atuacao atuacao;

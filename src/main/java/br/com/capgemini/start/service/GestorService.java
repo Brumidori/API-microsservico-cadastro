@@ -38,7 +38,7 @@ public class GestorService {
 	
 	public void salvar(GestorForm form) {
 		Gestor gestor = mapper.map(form, Gestor.class);
-		gestor.setPermissao(Boolean.TRUE.equals(form.getAdm()) ? Permissao.ADM : Permissao.GESTOR);
+		gestor.setPermissao(form.isAdm() ? Permissao.ADM : Permissao.GESTOR);
 		
 		log.info("salvar entity={}", gestor);
 		

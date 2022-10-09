@@ -92,7 +92,7 @@ public class StartService {
 		Start start = mapper.map(form, Start.class);
 		
 		start.setPermissao(Permissao.START);
-		if(Boolean.TRUE.equals(form.getBillable())) {
+		if(form.isBillable()) {
 			if(form.getDataBillable() == null) {
 				start.setDataBillable(LocalDate.now());
 			}

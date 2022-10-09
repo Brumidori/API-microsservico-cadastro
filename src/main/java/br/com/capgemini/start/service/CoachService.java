@@ -45,7 +45,7 @@ public class CoachService {
 	
 	public void salvar(CoachForm form) {
 		Coach coach = mapper.map(form, Coach.class);
-		coach.setPermissao(Boolean.TRUE.equals(form.getAdm()) ? Permissao.ADM : Permissao.COACH);
+		coach.setPermissao(form.isAdm() ? Permissao.ADM : Permissao.COACH);
 		
 		Gestor gestor = gestorRepository.findById(form.getIdGestor()).orElseThrow(()-> new ErroInternoException("Gestor não encontrado ao salvar um Coach"));
 		coach.setGestor(gestor);

@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.com.capgemini.start.exception.ErroInternoException;
+import br.com.capgemini.start.factory.UsuarioLogadoFactory;
 import br.com.capgemini.start.model.Agendamento;
 import br.com.capgemini.start.model.Coach;
 import br.com.capgemini.start.model.Gestor;
@@ -42,6 +43,9 @@ public class AgendamentoService {
 
 	@Autowired
 	private ModelMapper mapper;
+	
+	@Autowired
+	private UsuarioLogadoFactory usuarioLogadoFactory;
 	
 	public void salvarNegocio(AgendamentoEntrevistaForm form) {
 		Agendamento agendamento = new Agendamento();
@@ -84,7 +88,7 @@ public class AgendamentoService {
 	}
 	
 	public List<AgendamentoDto> listarDoUsuarioLogadoTodos() {
-		Usuario usuarioLogado = Usuario.usuarioLogado();
+		Usuario usuarioLogado = usuarioLogadoFactory.usuarioLogado().orElseThrow(()-> new ErroInternoException("Usuario logado não encontrado"));
 		
 		List<Agendamento> agendamentos;
 		if(Permissao.ADM.equals(usuarioLogado.getPermissao())) {
@@ -101,7 +105,7 @@ public class AgendamentoService {
 	}
 	
 	public List<AgendamentoDto> listarDoUsuarioLogadoProjeto() {
-		Usuario usuarioLogado = Usuario.usuarioLogado();
+		Usuario usuarioLogado = usuarioLogadoFactory.usuarioLogado().orElseThrow(()-> new ErroInternoException("Usuario logado não encontrado"));
 		
 		List<Agendamento> agendamentos;
 		if (usuarioLogado instanceof Gestor) {

@@ -141,8 +141,7 @@
 							
 							<!-- Entrevista de Negocio -->
 							<td class="text-center align-middle" scope="row">
-								<label class="m-0 main-font-9 redondo" th:title="${item.farolEntrevistaNegocio.mensagem}" th:text="${'&nbsp&nbsp' + item.farolEntrevistaNegocio.valor + '&nbsp&nbsp'}" 
-										th:style="${'background-color:'+item.farolEntrevistaNegocio.corFundo+';color:'+item.farolEntrevistaNegocio.corFonte+';'}"></label>
+								<section th:insert="~{componente/farol :: farol(${item.farolEntrevistaNegocio})}"></section>
 							</td>
 
 							<!-- Entrevista de Tecnica -->
@@ -160,8 +159,7 @@
 
 							<!-- Entrevista de Tecnica -->
 							<td class="text-center align-middle" scope="row">
-								<label class="m-0 main-font-9 redondo" th:title="${item.farolEntrevistaTecnica.mensagem}" th:text="${'&nbsp&nbsp' + item.farolEntrevistaTecnica.valor + '&nbsp&nbsp'}" 
-										th:style="${'background-color:'+item.farolEntrevistaTecnica.corFundo+';color:'+item.farolEntrevistaTecnica.corFonte+';'}"></label>
+								<section th:insert="~{componente/farol :: farol(${item.farolEntrevistaTecnica})}"></section>
 							</td>
 
 							<!-- Avaliacao -->
@@ -229,8 +227,7 @@
 							
 							<!-- Avaliacao -->
 							<td class="text-center align-middle" scope="row">
-								<label class="m-0 main-font-9 redondo" th:title="${item.farolUltimaAvaliacao.mensagem}" th:text="${'&nbsp&nbsp' + item.farolUltimaAvaliacao.valor + '&nbsp&nbsp'}" 
-										th:style="${'background-color:'+item.farolUltimaAvaliacao.corFundo+';color:'+item.farolEntrevistaTecnica.corFonte+';'}"></label>
+								<section th:insert="~{componente/farol :: farol(${item.farolUltimaAvaliacao})}"></section>
 							</td>							
 																					
 							<!-- Billable -->						
@@ -264,7 +261,7 @@
 										</div>
 									</div>	
 								</div>	
-								<span th:if="${item.billable}" class="bg-primary text-white redondo">&nbsp&nbspSim&nbsp&nbsp</span>						
+								<section th:if="${item.billable}"  th:insert="~{componente/billable :: billable}"></section>					
 							</td>
 														
 							<td th:if="${usuario.hasAnyRole('ROLE_EDITAR')}" class="text-center align-middle" scope="row">

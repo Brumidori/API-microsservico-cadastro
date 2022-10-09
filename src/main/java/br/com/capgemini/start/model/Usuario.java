@@ -14,7 +14,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -46,15 +45,6 @@ public abstract class Usuario implements UserDetails, Serializable {
 	@Column(nullable= false, length = 20)
 	@Enumerated(EnumType.STRING)
 	private Permissao permissao;
-	
-	// Security
-	public static Usuario usuarioLogado() {
-		try {
-			return (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		} catch (Exception e) {
-			return null;
-		}
-	}
 	
 	public boolean hasAnyRole(String role) {
 		for (Regra regra : permissao.getRegras()) {

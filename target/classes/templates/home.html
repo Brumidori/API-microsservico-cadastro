@@ -89,5 +89,9 @@
 			</div>
 		<section th:insert="mensagem :: mensagem"></section>
 	</section>
+	
+	<script th:if="${sucesso != null || erro != null || alerta != null}" type="text/javascript">
+		$("#mensagem").modal("show");
+	</script>
 </body>
 </html>

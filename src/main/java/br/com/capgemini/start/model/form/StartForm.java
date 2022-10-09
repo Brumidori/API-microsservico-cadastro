@@ -39,8 +39,7 @@ public class StartForm implements Serializable {
 	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate dataCadastro;
 	
-	@NotNull(message = Validacao.NOT_NULL)
-	private Boolean billable;
+	private boolean billable;
 	
 	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate dataBillable;

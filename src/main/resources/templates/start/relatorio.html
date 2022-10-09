@@ -59,7 +59,7 @@
 						<tr>
 							<td class="text-left align-middle">Billable:</td>
 							<td th:if="${relatorio.billable}" >
-								<label class="bg-primary text-white redondo">&nbsp&nbspSim&nbsp&nbsp</label>
+								<section th:insert="~{componente/billable :: billable}"></section>	
 							</td>
 							<td th:if="${!relatorio.billable}" class="text-left align-middle font-weight-bold">não</td>
 						</tr>
@@ -81,8 +81,7 @@
 								<td class="text-left align-middle" th:text="${item.parecer}" scope="row" />
 								<td class="text-center align-middle" th:text="${#temporals.format(item.data, 'dd/MM/yyyy')}" scope="row" />
 								<td class="text-center align-middle" scope="row">
-									<label class="m-0 main-font-9 redondo" th:title="${item.farol.mensagem}" th:text="${'&nbsp&nbsp' + item.farol.valor + '&nbsp&nbsp'}" 
-											th:style="${'background-color:'+item.farol.corFundo+';color:'+item.farol.corFonte+';'}"></label>
+									<section th:insert="~{componente/farol :: farol(${item.farol})}"></section>
 								</td>
 							</tr>
 						</tbody>
@@ -98,86 +97,76 @@
 				</div>
 	
 				<div class="col-12 mt-1">
-					<table class="table table-sm">
+					<table class="table table-sm w-100">
 						<tbody>
 							<tr>
 								<th scope="row">1</th>
 								<td>Capacidade Analítica</td>
-								<td>
-									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaTecnica.p01.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaTecnica.p01.valor + '&nbsp&nbsp'}" 
-											th:style="${'background-color:'+relatorio.entrevistaTecnica.p01.corFundo+';color:'+relatorio.entrevistaTecnica.p01.corFonte+';'}"></label>
+								<td class="text-right">
+									<section th:insert="~{componente/farol :: farol(${relatorio.entrevistaTecnica.p01})}"></section>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">2</th>
 								<td>SCRUM</td>
-								<td>
-									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaTecnica.p02.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaTecnica.p02.valor + '&nbsp&nbsp'}" 
-											th:style="${'background-color:'+relatorio.entrevistaTecnica.p02.corFundo+';color:'+relatorio.entrevistaTecnica.p02.corFonte+';'}"></label>
+								<td class="text-right">
+									<section th:insert="~{componente/farol :: farol(${relatorio.entrevistaTecnica.p02})}"></section>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">3</th>
 								<td>Controle de Versão - GIT (Branches / PR / MR)</td>
-								<td>
-									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaTecnica.p03.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaTecnica.p03.valor + '&nbsp&nbsp'}" 
-											th:style="${'background-color:'+relatorio.entrevistaTecnica.p03.corFundo+';color:'+relatorio.entrevistaTecnica.p03.corFonte+';'}"></label>
+								<td class="text-right">
+									<section th:insert="~{componente/farol :: farol(${relatorio.entrevistaTecnica.p03})}"></section>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">4</th>
 								<td>Banco de dados - SQL</td>
-								<td>
-									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaTecnica.p04.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaTecnica.p04.valor + '&nbsp&nbsp'}" 
-											th:style="${'background-color:'+relatorio.entrevistaTecnica.p04.corFundo+';color:'+relatorio.entrevistaTecnica.p04.corFonte+';'}"></label>
+								<td class="text-right">
+									<section th:insert="~{componente/farol :: farol(${relatorio.entrevistaTecnica.p04})}"></section>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">5</th>
 								<td>JSON / XML</td>
-								<td>
-									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaTecnica.p05.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaTecnica.p05.valor + '&nbsp&nbsp'}" 
-											th:style="${'background-color:'+relatorio.entrevistaTecnica.p05.corFundo+';color:'+relatorio.entrevistaTecnica.p05.corFonte+';'}"></label>
+								<td class="text-right">
+									<section th:insert="~{componente/farol :: farol(${relatorio.entrevistaTecnica.p05})}"></section>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">6</th>
 								<td>Desenvolvimento de API's - Métodos HTTP / Endpoints / Serviços</td>
-								<td>
-									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaTecnica.p06.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaTecnica.p06.valor + '&nbsp&nbsp'}" 
-											th:style="${'background-color:'+relatorio.entrevistaTecnica.p06.corFundo+';color:'+relatorio.entrevistaTecnica.p06.corFonte+';'}"></label>
+								<td class="text-right">
+									<section th:insert="~{componente/farol :: farol(${relatorio.entrevistaTecnica.p06})}"></section>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">7</th>
 								<td>JAVA 8+ - (JAX-RS / Spring Boot / Open liberty)</td>
-								<td>
-									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaTecnica.p07.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaTecnica.p07.valor + '&nbsp&nbsp'}" 
-											th:style="${'background-color:'+relatorio.entrevistaTecnica.p07.corFundo+';color:'+relatorio.entrevistaTecnica.p07.corFonte+';'}"></label>
+								<td class="text-right">
+									<section th:insert="~{componente/farol :: farol(${relatorio.entrevistaTecnica.p07})}"></section>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">8</th>
 								<td>NodeJS - (TypeScript)</td>
-								<td>
-									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaTecnica.p08.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaTecnica.p08.valor + '&nbsp&nbsp'}" 
-											th:style="${'background-color:'+relatorio.entrevistaTecnica.p08.corFundo+';color:'+relatorio.entrevistaTecnica.p08.corFonte+';'}"></label>
+								<td class="text-right">
+									<section th:insert="~{componente/farol :: farol(${relatorio.entrevistaTecnica.p08})}"></section>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">9</th>
 								<td>Angular - Componentização (TypeScript + Semantica HTML)</td>
-								<td>
-									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaTecnica.p09.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaTecnica.p09.valor + '&nbsp&nbsp'}" 
-											th:style="${'background-color:'+relatorio.entrevistaTecnica.p09.corFundo+';color:'+relatorio.entrevistaTecnica.p09.corFonte+';'}"></label>
+								<td class="text-right">
+									<section th:insert="~{componente/farol :: farol(${relatorio.entrevistaTecnica.p09})}"></section>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">10</th>
 								<td>Testes Unitários (JUnit + Mockito / Jest + Mocha)</td>
-								<td>
-									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaTecnica.p10.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaTecnica.p10.valor + '&nbsp&nbsp'}" 
-											th:style="${'background-color:'+relatorio.entrevistaTecnica.p10.corFundo+';color:'+relatorio.entrevistaTecnica.p10.corFonte+';'}"></label>
+								<td class="text-right">
+									<section th:insert="~{componente/farol :: farol(${relatorio.entrevistaTecnica.p10})}"></section>
 								</td>
 							</tr>
 						</tbody>
@@ -185,7 +174,7 @@
 				</div>
 			</div>
 			
-			<div class="row mt-3">
+			<div th:if="${relatorio.entrevistaNegocio != null}" class="row mt-3">
 				<div class="col-12 text-center">
 					<h5>Entrevista de Negócio</h5>
 					<span th:text="${relatorio.entrevistaNegocio.parecer}"></span>
@@ -193,102 +182,90 @@
 
 
 				<div class="col-12 mt-1">
-					<table class="table table-sm">
+					<table class="table table-sm w-100">
 						<tbody>
 							<tr>
 								<th scope="row">1</th>
 								<td>Histórico (Profissional, Cursos, Graduação)</td>
-								<td>
-									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaNegocio.p01.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaNegocio.p01.valor + '&nbsp&nbsp'}" 
-											th:style="${'background-color:'+relatorio.entrevistaNegocio.p01.corFundo+';color:'+relatorio.entrevistaNegocio.p01.corFonte+';'}"></label>
-								</td>
+								<td class="text-right">
+									<section th:insert="~{componente/farol :: farol(${relatorio.entrevistaNegocio.p01})}"></section>
+								</td>								
 							</tr>
 							<tr>
 								<th scope="row">2</th>
 								<td>Área de interesse</td>
-								<td>
-									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaNegocio.p02.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaNegocio.p02.valor + '&nbsp&nbsp'}" 
-											th:style="${'background-color:'+relatorio.entrevistaNegocio.p02.corFundo+';color:'+relatorio.entrevistaNegocio.p02.corFonte+';'}"></label>
+								<td class="text-right">
+									<section th:insert="~{componente/farol :: farol(${relatorio.entrevistaNegocio.p02})}"></section>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">3</th>
 								<td>Nível de contato com a área de tecnologia</td>
-								<td>
-									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaNegocio.p03.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaNegocio.p03.valor + '&nbsp&nbsp'}" 
-											th:style="${'background-color:'+relatorio.entrevistaNegocio.p03.corFundo+';color:'+relatorio.entrevistaNegocio.p03.corFonte+';'}"></label>
+								<td class="text-right">
+									<section th:insert="~{componente/farol :: farol(${relatorio.entrevistaNegocio.p03})}"></section>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">4</th>
 								<td>Proatividade</td>
-								<td>
-									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaNegocio.p04.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaNegocio.p04.valor + '&nbsp&nbsp'}" 
-											th:style="${'background-color:'+relatorio.entrevistaNegocio.p04.corFundo+';color:'+relatorio.entrevistaNegocio.p04.corFonte+';'}"></label>
+								<td class="text-right">
+									<section th:insert="~{componente/farol :: farol(${relatorio.entrevistaNegocio.p04})}"></section>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">5</th>
 								<td>Comunicação</td>
-								<td>
-									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaNegocio.p05.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaNegocio.p05.valor + '&nbsp&nbsp'}" 
-											th:style="${'background-color:'+relatorio.entrevistaNegocio.p05.corFundo+';color:'+relatorio.entrevistaNegocio.p05.corFonte+';'}"></label>
+								<td class="text-right">
+									<section th:insert="~{componente/farol :: farol(${relatorio.entrevistaNegocio.p05})}"></section>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">6</th>
 								<td>Contato com Metodologia Ágil</td>
-								<td>
-									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaNegocio.p06.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaNegocio.p06.valor + '&nbsp&nbsp'}" 
-											th:style="${'background-color:'+relatorio.entrevistaNegocio.p06.corFundo+';color:'+relatorio.entrevistaNegocio.p06.corFonte+';'}"></label>
+								<td class="text-right">
+									<section th:insert="~{componente/farol :: farol(${relatorio.entrevistaNegocio.p06})}"></section>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">7</th>
 								<td>Evolução pós curso</td>
-								<td>
-									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaNegocio.p07.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaNegocio.p07.valor + '&nbsp&nbsp'}" 
-											th:style="${'background-color:'+relatorio.entrevistaNegocio.p07.corFundo+';color:'+relatorio.entrevistaNegocio.p07.corFonte+';'}"></label>
+								<td class="text-right">
+									<section th:insert="~{componente/farol :: farol(${relatorio.entrevistaNegocio.p07})}"></section>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">8</th>
 								<td>Quais pontos fortes e de melhoria</td>
-								<td>
-									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaNegocio.p08.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaNegocio.p08.valor + '&nbsp&nbsp'}" 
-											th:style="${'background-color:'+relatorio.entrevistaNegocio.p08.corFundo+';color:'+relatorio.entrevistaNegocio.p08.corFonte+';'}"></label>
+								<td class="text-right">
+									<section th:insert="~{componente/farol :: farol(${relatorio.entrevistaNegocio.p08})}"></section>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">9</th>
 								<td>Organização e planejamento</td>
-								<td>
-									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaNegocio.p09.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaNegocio.p09.valor + '&nbsp&nbsp'}" 
-											th:style="${'background-color:'+relatorio.entrevistaNegocio.p09.corFundo+';color:'+relatorio.entrevistaNegocio.p09.corFonte+';'}"></label>
+								<td class="text-right">
+									<section th:insert="~{componente/farol :: farol(${relatorio.entrevistaNegocio.p09})}"></section>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">10</th>
 								<td>Disponibilidade hora extra</td>
-								<td>
-									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaNegocio.p10.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaNegocio.p10.valor + '&nbsp&nbsp'}" 
-											th:style="${'background-color:'+relatorio.entrevistaNegocio.p10.corFundo+';color:'+relatorio.entrevistaNegocio.p10.corFonte+';'}"></label>
+								<td class="text-right">
+									<section th:insert="~{componente/farol :: farol(${relatorio.entrevistaNegocio.p10})}"></section>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">11</th>
 								<td>Rotina</td>
-								<td>
-									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaNegocio.p11.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaNegocio.p11.valor + '&nbsp&nbsp'}" 
-											th:style="${'background-color:'+relatorio.entrevistaNegocio.p11.corFundo+';color:'+relatorio.entrevistaNegocio.p11.corFonte+';'}"></label>
+								<td class="text-right">
+									<section th:insert="~{componente/farol :: farol(${relatorio.entrevistaNegocio.p11})}"></section>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">12</th>
 								<td>Infra home office</td>
-								<td>
-									<label class="m-0 main-font-9 redondo" th:title="${relatorio.entrevistaNegocio.p12.mensagem}" th:text="${'&nbsp&nbsp' + relatorio.entrevistaNegocio.p12.valor + '&nbsp&nbsp'}" 
-											th:style="${'background-color:'+relatorio.entrevistaNegocio.p12.corFundo+';color:'+relatorio.entrevistaNegocio.p12.corFonte+';'}"></label>
+								<td class="text-right">
+									<section th:insert="~{componente/farol :: farol(${relatorio.entrevistaNegocio.p12})}"></section>
 								</td>
 							</tr>
 						</tbody>
