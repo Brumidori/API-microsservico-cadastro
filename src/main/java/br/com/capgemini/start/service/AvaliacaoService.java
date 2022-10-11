@@ -2,7 +2,6 @@ package br.com.capgemini.start.service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.com.capgemini.start.exception.ErroInternoException;
+import br.com.capgemini.start.factory.AvaliacaoFactory;
 import br.com.capgemini.start.model.Avaliacao;
 import br.com.capgemini.start.model.Start;
 import br.com.capgemini.start.model.dto.AvaliacaoDto;
@@ -25,6 +25,9 @@ public class AvaliacaoService {
 
 	@Autowired
 	private AvaliacaoRepository repository;
+	
+	@Autowired
+	private AvaliacaoFactory factory;
 	
 	@Autowired
 	private StartRepository startRepository;
@@ -66,10 +69,6 @@ public class AvaliacaoService {
 	}
 	
 	public List<AvaliacaoDto> listar() {
-		return repository.findAll(Sort.by(Sort.Direction.ASC, "idStart")).stream().map(this::avaliacaoDto).collect(Collectors.toList());
-	}
-	
-	private AvaliacaoDto avaliacaoDto(Avaliacao avaliacao) {
-		return mapper.map(avaliacao, AvaliacaoDto.class);
+		return factory.listDto(repository.findAll(Sort.by(Sort.Direction.ASC, "idStart")));
 	}
 }

@@ -59,7 +59,7 @@
 						<tr>
 							<td class="text-left align-middle">Billable:</td>
 							<td th:if="${relatorio.billable}" >
-								<section th:insert="~{componente/billable :: billable}"></section>	
+								<section th:insert="~{componente/billable :: billable}"></section>
 							</td>
 							<td th:if="${!relatorio.billable}" class="text-left align-middle font-weight-bold">não</td>
 						</tr>

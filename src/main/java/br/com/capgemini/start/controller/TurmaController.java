@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.capgemini.start.factory.FormFactory;
 import br.com.capgemini.start.model.form.TurmaForm;
 import br.com.capgemini.start.service.TurmaService;
+import br.com.capgemini.start.validation.TurmaValidator;
 
 @RestController
 @RequestMapping("turma")
@@ -28,6 +29,9 @@ public class TurmaController {
 	
 	@Autowired
 	private TurmaService service;
+	
+	@Autowired
+	private TurmaValidator validator;
 	
 	@Autowired
 	private FormFactory formFactory;
@@ -51,6 +55,8 @@ public class TurmaController {
 	@PostMapping
 	@Transactional
 	public ModelAndView salvar(@ModelAttribute("form") @Valid TurmaForm form, BindingResult result) {
+		validator.validaSalvar(form, result);
+		
 		if(result.hasErrors()) {
 			formFactory.setErro("Erro ao salvar Turma");
 			

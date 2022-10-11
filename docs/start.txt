@@ -59,16 +59,17 @@ INSERT INTO turma (nome) VALUES
 ('julho'),
 ('agosto');
 
-INSERT INTO gestor (id, email, nome, permissao, cor) VALUES
-(NEXTVAL('hibernate_sequence'), 'maria@gmail.com', 'Maria Gestora', 'LEITURA_ESCRITA', 'ROSA'),
-(NEXTVAL('hibernate_sequence'), 'carlos@gmail.com', 'Carlos Gestor', 'LEITURA_ESCRITA', 'AZUL_PASTEL');
+Regra da Home
+Starts
 
-INSERT INTO coach (id, email, nome, permissao, atuacao, id_gestor) VALUES
-(usuario_key_generator.NEXTVAL, 'paulo@gmail.com', 'Paulo Coach', 'LEITURA_ESCRITA', 'BACK_END', 1),
-(usuario_key_generator.NEXTVAL, 'pedro@gmail.com', 'Pedro Coach', 'LEITURA_ESCRITA', 'BACK_END', 2),
-(usuario_key_generator.NEXTVAL, 'flavia@gmail.com', 'Flavia Coach', 'LEITURA_ESCRITA', 'BACK_END', 2);
+Coachs
+-Starts
+-Agandamenos
 
-INSERT INTO m_start (id, email, nome, permissao, atuacao, id_coach, id_gestor, id_turma) VALUES
-(usuario_key_generator.NEXTVAL, 'prisciala@gmail.com', 'Priscila', 'LEITURA', 'BACK_END', 3, 1, 151),
-(usuario_key_generator.NEXTVAL, 'bia@gmail.com', 'Bia', 'LEITURA', 'BACK_END', 3, 1, 151),
-(usuario_key_generator.NEXTVAL, 'joao@gmail.com', 'João', 'LEITURA', 'BACK_END', 4, 51, 201);
+Gestor
+-Coachs
+-Starts dos Coachs
+-Agandamenos dos Coachs
+
+ADM*
+-Todos os Agandamenos

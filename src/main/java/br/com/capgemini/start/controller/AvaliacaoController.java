@@ -30,9 +30,6 @@ public class AvaliacaoController {
 	
 	@Autowired
 	private AvaliacaoService service;
-	
-	@Autowired
-	private StartController startController;
 
 	@Autowired
 	private FormFactory formFactory;
@@ -73,6 +70,6 @@ public class AvaliacaoController {
 		
 		formFactory.setSucesso("Avaliação salva com sucesso");
 		
-		return startController.formLista(form.newListaStartForm());
+		return new ModelAndView("redirect:/" + form.getViewAnterior());
 	}
 }

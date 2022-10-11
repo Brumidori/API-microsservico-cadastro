@@ -11,10 +11,12 @@ import org.springframework.context.annotation.Configuration;
 import br.com.capgemini.start.model.Coach;
 import br.com.capgemini.start.model.Gestor;
 import br.com.capgemini.start.model.Start;
+import br.com.capgemini.start.model.Usuario;
 import br.com.capgemini.start.model.dto.CoachDto;
 import br.com.capgemini.start.model.dto.GestorDto;
 import br.com.capgemini.start.model.dto.StartDto;
 import br.com.capgemini.start.model.dto.StartRelatorioDto;
+import br.com.capgemini.start.model.dto.UsuarioDto;
 import br.com.capgemini.start.model.form.CoachForm;
 import br.com.capgemini.start.model.form.GestorForm;
 import br.com.capgemini.start.model.form.StartForm;
@@ -44,6 +46,9 @@ public class ApiConfiguration {
 			
 			TypeMap<Gestor, GestorForm> propertyForm2 = mapper.createTypeMap(Gestor.class, GestorForm.class);
 			propertyForm2.addMappings(m -> m.map(Gestor::getUsername, GestorForm::setEmail));
+			
+			TypeMap<Gestor, UsuarioDto> propertyUsuarioDto = mapper.createTypeMap(Gestor.class, UsuarioDto.class);
+			propertyUsuarioDto.addMappings(m -> m.map(Gestor::getUsername, UsuarioDto::setEmail));
 		}
 		
 		{
@@ -55,6 +60,9 @@ public class ApiConfiguration {
 			
 			TypeMap<Coach, CoachForm> propertyForm2 = mapper.createTypeMap(Coach.class, CoachForm.class);
 			propertyForm2.addMappings(m -> m.map(Coach::getUsername, CoachForm::setEmail));
+			
+			TypeMap<Coach, UsuarioDto> propertyUsuarioDto = mapper.createTypeMap(Coach.class, UsuarioDto.class);
+			propertyUsuarioDto.addMappings(m -> m.map(Coach::getUsername, UsuarioDto::setEmail));
 		}
 		
 		{
@@ -66,11 +74,19 @@ public class ApiConfiguration {
 			
 			TypeMap<Start, StartForm> propertyForm2 = mapper.createTypeMap(Start.class, StartForm.class);
 			propertyForm2.addMappings(m -> m.map(Start::getUsername, StartForm::setEmail));
+			
+			TypeMap<Start, UsuarioDto> propertyUsuarioDto = mapper.createTypeMap(Start.class, UsuarioDto.class);
+			propertyUsuarioDto.addMappings(m -> m.map(Start::getUsername, UsuarioDto::setEmail));
 		}
 		
 		{
 			TypeMap<Start, StartRelatorioDto> propertyDto = mapper.createTypeMap(Start.class, StartRelatorioDto.class);
 			propertyDto.addMappings(m -> m.map(Start::getUsername, StartRelatorioDto::setEmail));
+		}
+		
+		{
+			TypeMap<Usuario, UsuarioDto> propertyUsuarioDto = mapper.createTypeMap(Usuario.class, UsuarioDto.class);
+			propertyUsuarioDto.addMappings(m -> m.map(Usuario::getUsername, UsuarioDto::setEmail));
 		}
 		
 		return mapper;

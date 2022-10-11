@@ -46,15 +46,6 @@ public abstract class Usuario implements UserDetails, Serializable {
 	@Enumerated(EnumType.STRING)
 	private Permissao permissao;
 	
-	public boolean hasAnyRole(String role) {
-		for (Regra regra : permissao.getRegras()) {
-			if(regra.getAuthority().equals(role)) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return permissao.getRegras();

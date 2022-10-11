@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no" charset="utf-8">
+<title>Start</title>
+<link href="/imagens/logo_pp.png" rel="icon" type="image/x-icon" />
+
+<link href="/css/main.css" rel="stylesheet" />
+
+<!-- WEBJARS -->
+<script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+
+</head>
+<body class="bg-light">
+	<!-- Barra de Menu -->
+	<section th:insert="barra_de_menu :: barra_de_menu"></section>
+	
+	<section class="container">
+		<div th:if="${home.starts != null && !home.starts.empty}" class="row justify-content-center shadow-sm rounded mt-3 p-3">
+			<div class="col-12">
+				<h5 class="text-center">Starts</h5>
+			</div>
+			
+			<div class="col-auto mt-2">
+				<section th:insert="~{componente/lista_starts :: lista_starts(${home.starts}, 'home')}"></section>
+			</div>					
+		</div>
+
+		<div th:if="${home.startsDosCoachs != null && !home.startsDosCoachs.empty}" class="row justify-content-center shadow-sm rounded mt-3 p-3">
+			<div class="col-12">
+				<h5 class="text-center">Starts dos Coachs</h5>
+			</div>
+			
+			<div class="col-auto mt-2">
+				<section th:insert="~{componente/lista_starts :: lista_starts(${home.startsDosCoachs}, 'home')}"></section>
+			</div>					
+		</div>
+
+		<div th:if="${home.coachs != null && !home.coachs.empty}" class="row justify-content-center shadow-sm rounded mt-3 p-3">
+			<div class="col-12">
+				<h5 class="text-center">Coachs</h5>
+			</div>
+			
+			<div class="col-auto mt-2">
+				<section th:insert="~{componente/lista_coachs :: lista_coachs(${home.coachs})}"></section>
+			</div>					
+		</div>
+						
+		<section th:if="${home.agendamentos != null && !home.agendamentos.empty}" th:insert="~{componente/agendamentos :: agendamentos(${home.agendamentos}, 'Agendamentos')}"></section>
+		
+		<section th:if="${home.agendamentosDosCoachs != null && !home.agendamentosDosCoachs.empty}" th:insert="~{componente/agendamentos :: agendamentos(${home.agendamentosDosCoachs}, 'Agendamentos dos Coachs')}"></section>
+		
+		<section th:if="${home.agendamentosDeTodos != null && !home.agendamentosDeTodos.empty}" th:insert="~{componente/agendamentos :: agendamentos(${home.agendamentosDeTodos}, 'Agendamentos de Todos Coachs')}"></section>
+	</section>
+	
+	<script th:if="${sucesso != null || erro != null || alerta != null}" type="text/javascript">
+		$("#mensagem").modal("show");
+	</script>
+</body>
+</html>

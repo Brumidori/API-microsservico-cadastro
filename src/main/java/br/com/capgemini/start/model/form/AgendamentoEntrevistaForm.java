@@ -2,6 +2,7 @@ package br.com.capgemini.start.model.form;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import br.com.capgemini.start.validation.Validacao;
@@ -22,4 +23,7 @@ public class AgendamentoEntrevistaForm implements Serializable {
 	private Long idCoachEntrevista;
 	
 	private Long idAgendamento;
+	
+	@NotBlank(message = Validacao.NOT_NULL)
+	private String viewAnterior;
 }

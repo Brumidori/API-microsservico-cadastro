@@ -1,7 +1,6 @@
 package br.com.capgemini.start.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +9,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.capgemini.start.exception.ErroInternoException;
+import br.com.capgemini.start.factory.CoachFactory;
 import br.com.capgemini.start.model.Coach;
 import br.com.capgemini.start.model.Gestor;
 import br.com.capgemini.start.model.Permissao;
 import br.com.capgemini.start.model.dto.CoachDto;
-import br.com.capgemini.start.model.dto.GestorDto;
 import br.com.capgemini.start.model.form.CoachForm;
 import br.com.capgemini.start.repository.CoachRepository;
 import br.com.capgemini.start.repository.GestorRepository;
@@ -26,6 +25,9 @@ public class CoachService {
 	
 	@Autowired
 	private CoachRepository repository;
+	
+	@Autowired
+	private CoachFactory factory;
 	
 	@Autowired
 	private GestorRepository gestorRepository;
@@ -62,19 +64,10 @@ public class CoachService {
 	}
 	
 	public List<CoachDto> listar() {
-		return repository.findAll(Sort.by(Sort.Direction.ASC, "gestor.nome", "nome")).stream().map(this::coachDto).collect(Collectors.toList());
+		return factory.listDto(repository.findAll(Sort.by(Sort.Direction.ASC, "gestor.nome", "nome")));
 	}
 	
 	public List<CoachDto> listarGestor(Long idGestor) {
-		return repository.findByGestor_id(idGestor, Sort.by(Sort.Direction.ASC, "nome")).stream().map(this::coachDto).collect(Collectors.toList());
-	}
-	
-	private CoachDto coachDto(Coach coach) {
-		CoachDto dto =  mapper.map(coach, CoachDto.class);
-		
-		dto.setGestor(mapper.map(coach.getGestor(), GestorDto.class));
-		dto.setCor(coach.getGestor().getCor());
-		
-		return dto;
+		return factory.listDto(repository.findByGestor_id(idGestor, Sort.by(Sort.Direction.ASC, "nome")));
 	}
 }

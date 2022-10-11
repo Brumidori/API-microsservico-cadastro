@@ -44,9 +44,10 @@ public class AgendamentoController {
 	}
 	
 	@GetMapping("entrevista/negocio")
-	public ModelAndView pegarEntrevistaNegocio(@RequestParam(value="idStart") Long idStart) {
+	public ModelAndView pegarEntrevistaNegocio(@RequestParam(value="idStart") Long idStart, @RequestParam(value="viewAnterior") String viewAnterior) {
 		AgendamentoEntrevistaForm form = new AgendamentoEntrevistaForm();
 		form.setIdStart(idStart);
+		form.setViewAnterior(viewAnterior);
 		
 		return form(form, "form_entrevista_negocio");
 	}
@@ -64,13 +65,14 @@ public class AgendamentoController {
 		
 		formFactory.setSucesso("Agendamento criado com sucesso");
 		
-		return new ModelAndView("redirect:/start/listar");
+		return new ModelAndView("redirect:/" + form.getViewAnterior());
 	}
 	
 	@GetMapping("entrevista/tecnica")
-	public ModelAndView pegarEntrevistaTecnica(@RequestParam(value="idStart") Long idStart) {
+	public ModelAndView pegarEntrevistaTecnica(@RequestParam(value="idStart") Long idStart, @RequestParam(value="viewAnterior") String viewAnterior) {
 		AgendamentoEntrevistaForm form = new AgendamentoEntrevistaForm();
 		form.setIdStart(idStart);
+		form.setViewAnterior(viewAnterior);
 		
 		return form(form, "form_entrevista_tecnica");
 	}
@@ -88,7 +90,7 @@ public class AgendamentoController {
 		
 		formFactory.setSucesso("Agendamento criado com sucesso");
 		
-		return new ModelAndView("redirect:/start/listar");
+		return new ModelAndView("redirect:/" + form.getViewAnterior());
 	}
 
 	@GetMapping("excluir")

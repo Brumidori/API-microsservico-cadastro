@@ -1,7 +1,6 @@
 package br.com.capgemini.start.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.capgemini.start.exception.ErroInternoException;
+import br.com.capgemini.start.factory.GestorFactory;
 import br.com.capgemini.start.model.Gestor;
 import br.com.capgemini.start.model.Permissao;
 import br.com.capgemini.start.model.dto.GestorDto;
@@ -24,6 +24,9 @@ public class GestorService {
 	@Autowired
 	private GestorRepository repository;
 
+	@Autowired
+	private GestorFactory factory;
+	
 	@Autowired
 	private ModelMapper mapper;
 	
@@ -52,10 +55,6 @@ public class GestorService {
 	}
 	
 	public List<GestorDto> listar() {
-		return repository.findAll(Sort.by(Sort.Direction.ASC, "nome")).stream().map(this::gestorDto).collect(Collectors.toList());
-	}
-	
-	private GestorDto gestorDto(Gestor gestor) {
-		return  mapper.map(gestor, GestorDto.class);
+		return factory.listDto(repository.findAll(Sort.by(Sort.Direction.ASC, "nome")));
 	}
 }

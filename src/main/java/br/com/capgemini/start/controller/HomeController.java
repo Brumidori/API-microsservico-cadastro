@@ -8,22 +8,25 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.capgemini.start.factory.FormFactory;
-import br.com.capgemini.start.service.AgendamentoService;
+import br.com.capgemini.start.model.Farol;
+import br.com.capgemini.start.service.HomeService;
 
 @Controller
 @Scope(value=WebApplicationContext.SCOPE_SESSION)
 public class HomeController {
+
+	private static final String FUNCIONALIDADE = "home";
 	
 	@Autowired
-	private AgendamentoService service;
+	private HomeService homeService;
 	
 	@Autowired
 	private FormFactory formFactory;
 	
 	public ModelAndView form() {
-		return formFactory.newModelAndView("home")
-				.addObject("agendamentos_todos", service.listarDoUsuarioLogadoTodos())
-				.addObject("agendamentos_projeto", service.listarDoUsuarioLogadoProjeto());
+		return formFactory.newModelAndView(FUNCIONALIDADE + "/home")
+				.addObject("home", homeService.home())
+				.addObject("farois", Farol.valores());
 	}
 	
 	@GetMapping("/")

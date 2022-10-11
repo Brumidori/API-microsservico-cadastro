@@ -67,7 +67,7 @@ public class StartSpecification implements SpecificationTemplate <Start>{
 	public StartSpecification nomeTurma(String nomeTurma) {
 		if(StringUtils.isNotBlank(nomeTurma)) {
 			specifications.add((root, criteriaQuery, criteriaBuilder) -> 
-				criteriaBuilder.equal(root.get("turma").get("nome"), nomeTurma));
+				criteriaBuilder.like(criteriaBuilder.upper(root.get("turma").get("nome")), "%" + nomeTurma.toUpperCase() + "%"));
 		}
 			
 		return this;

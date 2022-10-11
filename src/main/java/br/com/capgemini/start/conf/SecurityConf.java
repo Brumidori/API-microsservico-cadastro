@@ -2,6 +2,7 @@ package br.com.capgemini.start.conf;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -24,6 +25,18 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 		//http.cors().and().authorizeRequests();
 		
 		http.authorizeRequests()
+			.antMatchers(HttpMethod.POST, "/agendamento**").hasAnyRole("EDITAR")
+			.antMatchers(HttpMethod.GET, "/agendamento/excluir**").hasAnyRole("EDITAR")
+			
+			.antMatchers(HttpMethod.POST, "/coach**").hasAnyRole("EDITAR")
+			
+			.antMatchers(HttpMethod.POST, "/gestor**").hasAnyRole("EDITAR")
+			
+			.antMatchers(HttpMethod.POST, "/start**").hasAnyRole("EDITAR")
+			.antMatchers(HttpMethod.GET, "/start/billable**").hasAnyRole("BILLABLE")
+			
+			.antMatchers(HttpMethod.POST, "/turma**").hasAnyRole("EDITAR")
+			
 			.anyRequest().authenticated()
 			.and()
 				.formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/")

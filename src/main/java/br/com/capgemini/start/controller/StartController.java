@@ -65,7 +65,7 @@ public class StartController {
 				.addObject("coachs", form.getIdGestor() != null ? coachService.listarGestor(form.getIdGestor()) : new ArrayList<>());
 	}
 	
-	public ModelAndView formLista(ListaStartForm form) {
+	private ModelAndView formLista(ListaStartForm form) {
 		return formFactory.newModelAndView(FUNCIONALIDADE + "/lista")
 				.addObject("form", form)
 				.addObject("lista", service.listar(form))
@@ -126,12 +126,12 @@ public class StartController {
 	
 	@GetMapping("billable")
 	@Transactional
-	public ModelAndView billable(@RequestParam(value="id") Long id) {
+	public ModelAndView billable(@RequestParam(value="id") Long id, @RequestParam(value="viewAnterior") String viewAnterior) {
 		String nome = service.billable(id);
 		
 		formFactory.setSucesso(nome + " tornado billable com sucesso");
 				
-		return formLista(new ListaStartForm());
+		return new ModelAndView("redirect:/" + viewAnterior);
 	}
 	
 	@GetMapping("relatorio")

@@ -1,7 +1,6 @@
 package br.com.capgemini.start.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.com.capgemini.start.exception.ErroInternoException;
+import br.com.capgemini.start.factory.TurmaFactory;
 import br.com.capgemini.start.model.Turma;
 import br.com.capgemini.start.model.dto.TurmaDto;
 import br.com.capgemini.start.model.form.TurmaForm;
@@ -21,6 +21,9 @@ public class TurmaService {
 
 	@Autowired
 	private TurmaRepository repository;
+	
+	@Autowired
+	private TurmaFactory factory;
 
 	@Autowired
 	private ModelMapper mapper;
@@ -44,10 +47,6 @@ public class TurmaService {
 	}
 	
 	public List<TurmaDto> listar() {
-		return repository.findAll(Sort.by(Sort.Direction.ASC, "nome")).stream().map(this::turmaDto).collect(Collectors.toList());
-	}
-	
-	private TurmaDto turmaDto(Turma turma) {
-		return mapper.map(turma, TurmaDto.class);
+		return factory.listDto(repository.findAll(Sort.by(Sort.Direction.ASC, "nome")));
 	}
 }

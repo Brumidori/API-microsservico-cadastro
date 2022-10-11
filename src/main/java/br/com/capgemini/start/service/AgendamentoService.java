@@ -3,23 +3,18 @@ package br.com.capgemini.start.service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.com.capgemini.start.exception.ErroInternoException;
+import br.com.capgemini.start.factory.AgendamentoFactory;
 import br.com.capgemini.start.factory.UsuarioLogadoFactory;
 import br.com.capgemini.start.model.Agendamento;
-import br.com.capgemini.start.model.Coach;
-import br.com.capgemini.start.model.Gestor;
 import br.com.capgemini.start.model.Permissao;
-import br.com.capgemini.start.model.Usuario;
 import br.com.capgemini.start.model.dto.AgendamentoDto;
-import br.com.capgemini.start.model.dto.CoachDto;
-import br.com.capgemini.start.model.dto.StartDto;
+import br.com.capgemini.start.model.dto.UsuarioDto;
 import br.com.capgemini.start.model.form.AgendamentoEntrevistaForm;
 import br.com.capgemini.start.repository.AgendamentoRepository;
 import br.com.capgemini.start.repository.CoachRepository;
@@ -36,13 +31,13 @@ public class AgendamentoService {
 	private AgendamentoRepository repository;
 	
 	@Autowired
+	private AgendamentoFactory factory;
+	
+	@Autowired
 	private StartRepository startRepository;
 	
 	@Autowired
 	private CoachRepository coachRepository;
-
-	@Autowired
-	private ModelMapper mapper;
 	
 	@Autowired
 	private UsuarioLogadoFactory usuarioLogadoFactory;
@@ -88,45 +83,42 @@ public class AgendamentoService {
 	}
 	
 	public List<AgendamentoDto> listarDoUsuarioLogadoTodos() {
-		Usuario usuarioLogado = usuarioLogadoFactory.usuarioLogado().orElseThrow(()-> new ErroInternoException("Usuario logado não encontrado"));
+		UsuarioDto usuarioLogado = usuarioLogadoFactory.usuarioLogado().orElseThrow(()-> new ErroInternoException("Usuario logado não encontrado"));
 		
 		List<Agendamento> agendamentos;
 		if(Permissao.ADM.equals(usuarioLogado.getPermissao())) {
 			agendamentos = repository.findAll(SORT);
-		} else if (usuarioLogado instanceof Gestor) {
-			agendamentos = repository.findByCoach_gestor_id(usuarioLogado.getId(), SORT);
-		} else if (usuarioLogado instanceof Coach) {
-			agendamentos = repository.findByCoach_id(usuarioLogado.getId(), SORT);
 		} else {
-			agendamentos = new ArrayList<>();
+			switch (usuarioLogado.getTipo()) {
+				case GESTOR: agendamentos = repository.findByCoach_gestor_id(usuarioLogado.getId(), SORT);
+				break;
+		
+				case COACH: agendamentos = repository.findByCoach_id(usuarioLogado.getId(), SORT);
+				break;
+				
+				case START:
+				default: agendamentos = new ArrayList<>();
+			}		
 		}
 		
-		return agendamentos.stream().map(this::agendamentoDto).collect(Collectors.toList());
+		return factory.listDto(agendamentos);
 	}
 	
 	public List<AgendamentoDto> listarDoUsuarioLogadoProjeto() {
-		Usuario usuarioLogado = usuarioLogadoFactory.usuarioLogado().orElseThrow(()-> new ErroInternoException("Usuario logado não encontrado"));
+		UsuarioDto usuarioLogado = usuarioLogadoFactory.usuarioLogado().orElseThrow(()-> new ErroInternoException("Usuario logado não encontrado"));
 		
 		List<Agendamento> agendamentos;
-		if (usuarioLogado instanceof Gestor) {
-			agendamentos = repository.findByCoach_gestor_id(usuarioLogado.getId(), SORT);
-		} else if (usuarioLogado instanceof Coach) {
-			agendamentos = repository.findByCoach_id(usuarioLogado.getId(), SORT);
-		} else {
-			agendamentos = new ArrayList<>();
+		switch (usuarioLogado.getTipo()) {
+			case GESTOR: agendamentos = repository.findByCoach_gestor_id(usuarioLogado.getId(), SORT);
+			break;
+	
+			case COACH: agendamentos = repository.findByCoach_id(usuarioLogado.getId(), SORT);
+			break;
+			
+			case START:
+			default: agendamentos = new ArrayList<>();
 		}
 		
-		return agendamentos.stream().map(this::agendamentoDto).collect(Collectors.toList());
-	}
-	
-	private AgendamentoDto agendamentoDto(Agendamento agendamento) {
-		AgendamentoDto dto =  mapper.map(agendamento, AgendamentoDto.class);
-		
-		dto.setStart(mapper.map(agendamento.getStart(), StartDto.class));
-		CoachDto coach = mapper.map(agendamento.getCoach(), CoachDto.class);
-		coach.setCor(agendamento.getCoach().getGestor().getCor());
-		dto.setCoach(coach);
-		
-		return dto;
+		return factory.listDto(agendamentos);
 	}
 }
