@@ -5,7 +5,6 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.capgemini.start.exception.ErroInternoException;
@@ -30,6 +29,9 @@ public class GestorService {
 	@Autowired
 	private ModelMapper mapper;
 	
+	@Autowired
+	private UsuarioService usuarioService;
+	
 	public GestorForm form(Long id) {
 		Gestor gestor = repository.findById(id).orElseThrow(()-> new ErroInternoException("Gestor não encontrado na geração do Gestor Form"));
 		
@@ -45,7 +47,7 @@ public class GestorService {
 		
 		log.info("salvar entity={}", gestor);
 		
-		gestor.setPassword(new BCryptPasswordEncoder().encode("1234"));
+		gestor.setPassword(usuarioService.senha(form.getId(), form.isReiniciarSenha()));
 		
 		repository.save(gestor);
 	}

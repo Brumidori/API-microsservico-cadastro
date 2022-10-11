@@ -70,7 +70,7 @@
 					<p class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('dataCadastro')}" th:text="${erro}"></p>
 				</div>
 				
-				<div class="col-4 mt-1">
+				<div class="col-2 mt-1">
 					<div class="form-group form-check mt-1">
 						<input class="form-check-input" type="checkbox" name="adm" th:checked="${form.adm} ? 'checked'">
 						<label class="form-check-label">ADM</label>
@@ -78,6 +78,14 @@
 					<p class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('adm')}" th:text="${erro}"></p>
 				</div>
 
+				<div class="col-2 mt-1">
+					<div class="form-group form-check mt-1">
+						<input class="form-check-input" type="checkbox" name="reiniciarSenha" th:checked="${form.reiniciarSenha} ? 'checked'">
+						<label class="form-check-label">Reiniciar Senha</label>
+					</div>
+					<p class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('reiniciarSenha')}" th:text="${erro}"></p>
+				</div>
+				
 				<div class="col-12 mt-1">
 					<div class="input-group">
 						<div class="input-group-prepend">

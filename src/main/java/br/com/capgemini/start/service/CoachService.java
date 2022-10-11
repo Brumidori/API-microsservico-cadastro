@@ -5,7 +5,6 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.capgemini.start.exception.ErroInternoException;
@@ -35,6 +34,9 @@ public class CoachService {
 	@Autowired
 	private ModelMapper mapper;
 	
+	@Autowired
+	private UsuarioService usuarioService;
+	
 	public CoachForm form(Long id) {
 		Coach coach = repository.findById(id).orElseThrow(()-> new ErroInternoException("Coach não encontrado na geração do Coach Form"));
 		
@@ -54,7 +56,7 @@ public class CoachService {
 		
 		log.info("salvar entity={}", coach);
 		
-		coach.setPassword(new BCryptPasswordEncoder().encode("1234"));
+		coach.setPassword(usuarioService.senha(form.getId(), form.isReiniciarSenha()));
 		
 		repository.save(coach);
 	}

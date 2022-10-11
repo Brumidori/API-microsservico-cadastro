@@ -17,7 +17,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@Entity(name="m_start")
+@Entity(name="usuario_start")
 public class Start extends Usuario {
 	private static final long serialVersionUID = 1L;
 	
@@ -34,15 +34,15 @@ public class Start extends Usuario {
 	@Column(name = "data_billable")
 	private LocalDate dataBillable;
 	
-	@JoinColumn(name = "entrevista_negocio")
+	@JoinColumn(name = "id_entrevista_negocio")
 	@OneToOne
 	private EntrevistaNegocio entrevistaNegocio;
 	
-	@JoinColumn(name = "entrevista_tecnica")
+	@JoinColumn(name = "id_entrevista_tecnica")
 	@OneToOne
 	private EntrevistaTecnica entrevistaTecnica;
 	
-	@JoinColumn(name = "ultima_avaliacao")
+	@JoinColumn(name = "id_ultima_avaliacao")
 	@ManyToOne
 	private Avaliacao ultimaAvaliacao;
 	

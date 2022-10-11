@@ -46,7 +46,6 @@ public class StartForm implements Serializable {
 	
 	private Long idEntrevistaNegocio;
 	private Long idEntrevistaTecnica;
-	
 	private Long idUltimaAvaliacao;
 	
 	private Long idCoach;
@@ -56,4 +55,6 @@ public class StartForm implements Serializable {
 	
 	@NotNull(message = Validacao.NOT_NULL)
 	private Long idTurma;
+	
+	private boolean reiniciarSenha;
 }

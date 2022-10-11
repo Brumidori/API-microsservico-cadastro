@@ -25,6 +25,8 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 		//http.cors().and().authorizeRequests();
 		
 		http.authorizeRequests()
+			.antMatchers("/grafico**").permitAll()
+			
 			.antMatchers(HttpMethod.POST, "/agendamento**").hasAnyRole("EDITAR")
 			.antMatchers(HttpMethod.GET, "/agendamento/excluir**").hasAnyRole("EDITAR")
 			

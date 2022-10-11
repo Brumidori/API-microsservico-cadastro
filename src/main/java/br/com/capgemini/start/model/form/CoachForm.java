@@ -32,7 +32,6 @@ public class CoachForm implements Serializable {
 	@Size(max=200, message = Validacao.SIZE_MAX_200)
 	private String nome;
 	
-	@NotNull(message = Validacao.NOT_NULL)
 	private boolean adm;
 	
 	@NotNull(message = Validacao.NOT_NULL)
@@ -44,4 +43,6 @@ public class CoachForm implements Serializable {
 	
 	@NotNull(message = Validacao.NOT_NULL)
 	private Long idGestor;
+	
+	private boolean reiniciarSenha;
 }

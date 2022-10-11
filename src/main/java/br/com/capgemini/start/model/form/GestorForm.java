@@ -33,7 +33,6 @@ public class GestorForm implements Serializable {
 	@Size(max=200, message = Validacao.SIZE_MAX_200)
 	private String nome;
 
-	@NotNull(message = Validacao.NOT_NULL)
 	private boolean adm;
 	
 	@NotNull(message = Validacao.NOT_NULL)
@@ -42,4 +41,6 @@ public class GestorForm implements Serializable {
 	@NotNull(message = Validacao.NOT_NULL)
 	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate dataCadastro;
+	
+	private boolean reiniciarSenha;
 }

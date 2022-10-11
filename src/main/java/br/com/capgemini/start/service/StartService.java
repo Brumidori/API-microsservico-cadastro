@@ -8,7 +8,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.capgemini.start.exception.ErroInternoException;
@@ -62,6 +61,9 @@ public class StartService {
 	@Autowired
 	private ModelMapper mapper;
 	
+	@Autowired
+	private UsuarioService usuarioService;
+	
 	public StartForm form(Long id) {
 		Start start = repository.findById(id).orElseThrow(()-> new ErroInternoException("Start não encontrado na geração do Start Form"));
 		
@@ -113,7 +115,7 @@ public class StartService {
 		
 		log.info("salvar entity={}", start);
 		
-		start.setPassword(new BCryptPasswordEncoder().encode("1234"));
+		start.setPassword(usuarioService.senha(form.getId(), form.isReiniciarSenha()));
 		
 		repository.save(start);
 	}
