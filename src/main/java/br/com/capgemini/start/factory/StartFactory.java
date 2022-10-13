@@ -100,7 +100,9 @@ public class StartFactory {
 		}
 		dto.setGestor(mapper.map(start.getGestor(), GestorDto.class));
 		dto.setTurma(mapper.map(start.getTurma(), TurmaDto.class));
-		dto.setSquad(mapper.map(start.getSquad(), SquadDto.class));
+		if(start.getSquad() != null) {
+			dto.setSquad(mapper.map(start.getSquad(), SquadDto.class));
+		}
 		
 		return dto;
 	}
