@@ -32,19 +32,19 @@
 						<div class="input-group-prepend">
 							<div class="input-group-text">*Nome</div>
 						</div>
-						<input class="form-control" type="text" th:field="*{nome}" placeholder="nome">
+						<input id="input_nome" class="form-control" type="text" th:field="*{nome}" placeholder="nome">
 					</div>
-					<p class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('nome')}" th:text="${erro}"></p>
+					<p id="erro_input_nome" class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('nome')}" th:text="${erro}"></p>
 				</div>
 
 				<div class="col-6 mt-3">
 					<div class="input-group input-group">
 						<div class="input-group-prepend">
-							<div class="input-group-text">*Email</div>
+							<div id="input_email" class="input-group-text">*Email</div>
 						</div>
 						<input class="form-control" type="text" th:field="*{email}" placeholder="email">
 					</div>
-					<p class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('email')}" th:text="${erro}"></p>
+					<p id="erro_input_email" class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('email')}" th:text="${erro}"></p>
 				</div>
 
 				<div class="col-4 mt-1">
@@ -52,12 +52,12 @@
 						<div class="input-group-prepend">
 							<div class="input-group-text">*Atuação</div>
 						</div>
-						<select class="form-control" name="atuacao">
+						<select id="select_atuacao" class="form-control" name="atuacao">
 							<option th:value="${null}" th:selected="${form.atuacao == null}">Escolha uma...</option>
 							<option th:each="e : ${atuacoes}" th:value="${e}" th:text="${e.imprime}" th:selected="${e.equals(form.atuacao)}"></option>
 						</select>
 					</div>
-					<p class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('atuacao')}" th:text="${erro}"></p>
+					<p id="erro_select_atuacao" class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('atuacao')}" th:text="${erro}"></p>
 				</div>
 				
 				<div class="col-4 mt-1">
@@ -65,47 +65,60 @@
 						<div class="input-group-prepend">
 							<div class="input-group-text">*Data de Cadastro</div>
 						</div>
-						<input class="form-control" type="date" th:field="*{dataCadastro}">
+						<input id="input_dataCadastro" class="form-control" type="date" th:field="*{dataCadastro}">
 					</div>
-					<p class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('dataCadastro')}" th:text="${erro}"></p>
-				</div>
-				
-				<div class="col-2 mt-1">
-					<div class="form-group form-check mt-1">
-						<input class="form-check-input" type="checkbox" name="adm" th:checked="${form.adm} ? 'checked'">
-						<label class="form-check-label">ADM</label>
-					</div>
-					<p class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('adm')}" th:text="${erro}"></p>
+					<p id="erro_input_dataCadastro" class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('dataCadastro')}" th:text="${erro}"></p>
 				</div>
 
-				<div class="col-2 mt-1">
-					<div class="form-group form-check mt-1">
-						<input class="form-check-input" type="checkbox" name="reiniciarSenha" th:checked="${form.reiniciarSenha} ? 'checked'">
-						<label class="form-check-label">Reiniciar Senha</label>
-					</div>
-					<p class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('reiniciarSenha')}" th:text="${erro}"></p>
-				</div>
-				
-				<div class="col-12 mt-1">
+				<div class="col-4 mt-1">
 					<div class="input-group">
 						<div class="input-group-prepend">
 							<div class="input-group-text">*Gestor</div>
 						</div>
-						<select class="form-control" name="idGestor">
+						<select id="select_gestor" class="form-control" name="idGestor">
 							<option th:value="${null}" th:selected="${form.idGestor == null}">Escolha um...</option>
 							<option th:each="e : ${gestores}" th:value="${e.id}" th:text="${e.nome}" th:selected="${e.id == form.idGestor}"></option>
 						</select>
 					</div>
-					<p class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('idGestor')}" th:text="${erro}"></p>
+					<p id="erro_select_gestor" class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('idGestor')}" th:text="${erro}"></p>
+				</div>
+
+				<div class="col-6 mt-1">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<div class="input-group-text">Squad</div>
+						</div>
+						<select id="select_squad" class="form-control" name="idSquad">
+							<option th:value="${null}" th:selected="${form.idSquad == null}">Escolha uma...</option>
+							<option th:each="e : ${squads}" th:value="${e.id}" th:text="${e.nome}" th:selected="${e.id == form.idSquad}"></option>
+						</select>
+					</div>
+					<p id="erro_select_squad" class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('idSquad')}" th:text="${erro}"></p>
+				</div>
+												
+				<div class="col-3 mt-1">
+					<div class="form-group form-check mt-1">
+						<input id="checkbox_adm" class="form-check-input" type="checkbox" name="adm" th:checked="${form.adm} ? 'checked'">
+						<label class="form-check-label">ADM</label>
+					</div>
+					<p id="erro_checkbox_adm" class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('adm')}" th:text="${erro}"></p>
+				</div>
+
+				<div class="col-3 mt-1">
+					<div class="form-group form-check mt-1">
+						<input id="checkbox_reiniciarSenha" class="form-check-input" type="checkbox" name="reiniciarSenha" th:checked="${form.reiniciarSenha} ? 'checked'">
+						<label class="form-check-label">Reiniciar Senha</label>
+					</div>
+					<p id="erro_checkbox_reiniciarSenha" class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('reiniciarSenha')}" th:text="${erro}"></p>
 				</div>
 			</div>
 
 			<div class="row justify-content-end">
 				<div class="col-auto mt-3">
-					<a class="btn btn-secondary" href="/home">Cancelar</a>
+					<a id="button_cancelar" class="btn btn-secondary" href="/home">Cancelar</a>
 				</div>
 				<div class="col-auto mt-3">
-					<button class="btn btn-primary" formmethod="post" type="submit" th:formaction="@{/coach}">Salvar</button>
+					<button id="button_salvar" class="btn btn-primary" formmethod="post" type="submit" th:formaction="@{/coach}">Salvar</button>
 				</div>
 			</div>
 		</form>

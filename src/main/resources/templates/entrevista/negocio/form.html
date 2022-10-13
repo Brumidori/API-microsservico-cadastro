@@ -33,9 +33,9 @@
 						<div class="input-group-prepend">
 							<div class="input-group-text">Start</div>
 						</div>
-						<input class="form-control" type="text" th:field="*{nomeStart}" readonly="readonly">
+						<input id="input_nomeStart" class="form-control" type="text" th:field="*{nomeStart}" readonly="readonly">
 					</div>
-					<p class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('nomeStart')}" th:text="${erro}"></p>
+					<p id="erro_nomeStart" class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('nomeStart')}" th:text="${erro}"></p>
 				</div>
 
 				<div class="col-6 mt-3">
@@ -43,9 +43,9 @@
 						<div class="input-group-prepend">
 							<div class="input-group-text">Coach Entrevista</div>
 						</div>
-						<input class="form-control" type="text" th:field="*{nomeCoachEntrevista}" readonly="readonly">
+						<input id="input_nomeCoachEntrevista" class="form-control" type="text" th:field="*{nomeCoachEntrevista}" readonly="readonly">
 					</div>
-					<p class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('nomeCoachEntrevista')}" th:text="${erro}"></p>
+					<p id="erro_input_nomeCoachEntrevista" class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('nomeCoachEntrevista')}" th:text="${erro}"></p>
 				</div>
 
 				<div class="col-12 mt-1">
@@ -216,18 +216,18 @@
 						<div class="input-group-prepend">
 							<div class="input-group-text">*Parecer</div>
 						</div>
-						<textarea class="form-control" name="parecer" th:text="${form.parecer}" rows="2"></textarea>
+						<textarea id="textarea_parecer" class="form-control" name="parecer" th:text="${form.parecer}" rows="2"></textarea>
 					</div>
-					<p class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('parecer')}" th:text="${erro}"></p>
+					<p id="erro_textarea_parecer" class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('parecer')}" th:text="${erro}"></p>
 				</div>
 			</div>
 
 			<div class="row justify-content-end">
 				<div class="col-auto mt-3">
-					<a class="btn btn-secondary" href="/home">Cancelar</a>
+					<a id="button_cancelar" class="btn btn-secondary" href="/home">Cancelar</a>
 				</div>
 				<div class="col-auto mt-3">
-					<button class="btn btn-primary" formmethod="post" type="submit" th:formaction="@{/entrevista/negocio}">Salvar</button>
+					<button id="button_salvar" class="btn btn-primary" formmethod="post" type="submit" th:formaction="@{/entrevista/negocio}">Salvar</button>
 				</div>
 			</div>
 		</form>

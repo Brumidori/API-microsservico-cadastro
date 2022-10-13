@@ -57,4 +57,8 @@ public class Start extends Usuario {
 	@JoinColumn(nullable= false, name = "id_turma")
 	@ManyToOne
 	private Turma turma;
+	
+	@JoinColumn(name = "id_squad")
+	@ManyToOne
+	private Squad squad;
 }

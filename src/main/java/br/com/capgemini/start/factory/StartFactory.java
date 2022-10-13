@@ -18,6 +18,7 @@ import br.com.capgemini.start.model.dto.CoachDto;
 import br.com.capgemini.start.model.dto.EntrevistaNegocioDto;
 import br.com.capgemini.start.model.dto.EntrevistaTecnicaDto;
 import br.com.capgemini.start.model.dto.GestorDto;
+import br.com.capgemini.start.model.dto.SquadDto;
 import br.com.capgemini.start.model.dto.StartDto;
 import br.com.capgemini.start.model.dto.StartRelatorioDto;
 import br.com.capgemini.start.model.dto.TurmaDto;
@@ -75,6 +76,9 @@ public class StartFactory {
 		dto.setCor(gestor.getCor());
 		
 		dto.setTurma(mapper.map(start.getTurma(), TurmaDto.class));
+		if(start.getSquad() != null) {
+			dto.setSquad(mapper.map(start.getSquad(), SquadDto.class));
+		}
 		
 		return dto;
 	}
@@ -96,6 +100,7 @@ public class StartFactory {
 		}
 		dto.setGestor(mapper.map(start.getGestor(), GestorDto.class));
 		dto.setTurma(mapper.map(start.getTurma(), TurmaDto.class));
+		dto.setSquad(mapper.map(start.getSquad(), SquadDto.class));
 		
 		return dto;
 	}

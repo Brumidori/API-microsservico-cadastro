@@ -22,6 +22,7 @@ import br.com.capgemini.start.model.Atuacao;
 import br.com.capgemini.start.model.form.CoachForm;
 import br.com.capgemini.start.service.CoachService;
 import br.com.capgemini.start.service.GestorService;
+import br.com.capgemini.start.service.SquadService;
 import br.com.capgemini.start.validation.UsuarioValidator;
 
 @RestController
@@ -38,6 +39,9 @@ public class CoachController {
 	private GestorService gestorService;
 	
 	@Autowired
+	private SquadService squadService;
+	
+	@Autowired
 	private UsuarioValidator usuarioValidator;
 
 	@Autowired
@@ -47,7 +51,8 @@ public class CoachController {
 		return formFactory.newModelAndView(FUNCIONALIDADE + "/form")
 				.addObject("form", form)
 				.addObject("atuacoes", Atuacao.values())
-				.addObject("gestores", gestorService.listar());
+				.addObject("gestores", gestorService.listar())
+				.addObject("squads", squadService.listar());
 	}
 	
 	private ModelAndView formLista() {

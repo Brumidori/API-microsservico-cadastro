@@ -24,4 +24,5 @@ public class CoachDto implements Serializable {
 	private CorProjeto cor;
 	private LocalDate dataCadastro;
 	private GestorDto gestor;
+	private SquadDto squad;
 }

@@ -28,37 +28,37 @@
 					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 					
 					<div class="row">
-						<div class="col-4 mt-3">
+						<div class="col-6 mt-3">
 							<div class="input-group input-group">
 								<div class="input-group-prepend">
 									<div class="input-group-text">Nome</div>
 								</div>
-								<input class="form-control" type="text" th:field="*{nome}" placeholder="nome">
+								<input id="input_nome" class="form-control" type="text" th:field="*{nome}" placeholder="nome">
 							</div>
-							<p class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('nome')}" th:text="${erro}"></p>
+							<p id="erro_input_nome" class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('nome')}" th:text="${erro}"></p>
 						</div>
 						
-						<div class="col-4 mt-3">
+						<div class="col-6 mt-3">
 							<div class="input-group input-group">
 								<div class="input-group-prepend">
 									<div class="input-group-text">Email</div>
 								</div>
-								<input class="form-control" type="text" th:field="*{emailUsuario}" placeholder="email">
+								<input id="input_email" class="form-control" type="text" th:field="*{emailUsuario}" placeholder="email">
 							</div>
-							<p class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('emailUsuario')}" th:text="${erro}"></p>
+							<p id="erro_input_email" class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('emailUsuario')}" th:text="${erro}"></p>
 						</div>
 						
-						<div class="col-4 mt-3">
+						<div class="col-4 mt-1">
 							<div class="input-group">
 								<div class="input-group-prepend">
-									<div class="input-group-text">*Atuação</div>
+									<div class="input-group-text">Atuação</div>
 								</div>
-								<select class="form-control" name="atuacao">
+								<select id="select_atuacao" class="form-control" name="atuacao">
 									<option th:value="${null}" th:selected="${form.atuacao == null}">Escolha uma...</option>
 									<option th:each="e : ${atuacoes}" th:value="${e}" th:text="${e.imprime}" th:selected="${e.equals(form.atuacao)}"></option>
 								</select>
 							</div>
-							<p class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('atuacao')}" th:text="${erro}"></p>
+							<p id="erro_select_atuacao" class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('atuacao')}" th:text="${erro}"></p>
 						</div>
 				
 						<div class="col-4 mt-1">
@@ -66,9 +66,9 @@
 								<div class="input-group-prepend">
 									<div class="input-group-text">Coach</div>
 								</div>
-								<input class="form-control" type="text" th:field="*{nomeCoach}" placeholder="coach">
+								<input id="input_coach" class="form-control" type="text" th:field="*{nomeCoach}" placeholder="coach">
 							</div>
-							<p class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('nomeCoach')}" th:text="${erro}"></p>
+							<p id="erro_input_coach" class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('nomeCoach')}" th:text="${erro}"></p>
 						</div>
 
 						<div class="col-4 mt-1">
@@ -76,30 +76,60 @@
 								<div class="input-group-prepend">
 									<div class="input-group-text">Gestor</div>
 								</div>
-								<input class="form-control" type="text" th:field="*{nomeGestor}" placeholder="gestor">
+								<input id="input_gestor" class="form-control" type="text" th:field="*{nomeGestor}" placeholder="gestor">
 							</div>
-							<p class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('nomeGestor')}" th:text="${erro}"></p>
+							<p id="erro_input_gestor" class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('nomeGestor')}" th:text="${erro}"></p>
 						</div>
 
 						<div class="col-4 mt-1">
-							<div class="input-group input-group">
+							<div class="input-group">
 								<div class="input-group-prepend">
 									<div class="input-group-text">Turma</div>
 								</div>
-								<input class="form-control" type="text" th:field="*{nomeTurma}" placeholder="turma">
+								<select id="select_turma" class="form-control" name="idTurma">
+									<option th:value="${null}" th:selected="${form.idTurma == null}">Escolha uma...</option>
+									<option th:each="e : ${turmas}" th:value="${e.id}" th:text="${e.nome}" th:selected="${e.id == form.idTurma}"></option>
+								</select>
 							</div>
-							<p class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('nomeTurma')}" th:text="${erro}"></p>
-						</div>
-							
+							<p id="erro_select_turma" class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('idTurma')}" th:text="${erro}"></p>
+						</div>	
+						
+						<div class="col-4 mt-1">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">Squad</div>
+								</div>
+								<select id="select_squad" class="form-control" name="idSquad">
+									<option th:value="${null}" th:selected="${form.idSquad == null}">Escolha uma...</option>
+									<option th:each="e : ${squads}" th:value="${e.id}" th:text="${e.nome}" th:selected="${e.id == form.idSquad}"></option>
+								</select>
+							</div>
+							<p id="erro_select_squad" class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('idSquad')}" th:text="${erro}"></p>
+						</div>	
+						
+						<div class="col-4 mt-1">
+							<div class="form-group form-check mt-1">
+								<input id="checkbox_billable" class="form-check-input" type="checkbox" name="billable" th:checked="${form.billable} ? 'checked'">
+								<label class="form-check-label bg-primary text-white redondo">&nbsp&nbspBillable&nbsp&nbsp</label>
+							</div>
+							<p id="erro_checkbox_billable" class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('billable')}" th:text="${erro}"></p>
+						</div>												
 					</div>
 					<div class="row justify-content-end">					
 						<div class="col-2 mt-1">
-							<button class="btn btn-primary btn-block" formmethod="post" type="submit" th:formaction="@{/start/listar}">Buscar</button>
+							<button id="button_buscar" class="btn btn-primary btn-block" formmethod="post" type="submit" th:formaction="@{/start/listar}">Buscar</button>
 						</div>
 					</div>
 				</form>
 			</div>
-			
+
+			<div th:if="${form.exibirGraficoPizza()}" class="col-12 text-center mt-2">
+				<a data-toggle="collapse" href="#cGrafico" role="button" aria-expanded="false" aria-controls="cGrafico">Gráfico</a>
+				<div class="collapse text-center" id="cGrafico">
+					<img  th:src="@{/grafico/start/pizza/farois/turma(idTurma=${form.idTurma})}"></img >
+				</div>
+			</div>
+							
 			<div class="col-auto mt-2">
 				<section th:insert="~{componente/lista_starts :: lista_starts(${lista}, 'start/listar')}"></section>
 			</div>

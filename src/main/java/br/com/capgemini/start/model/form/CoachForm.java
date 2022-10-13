@@ -44,5 +44,7 @@ public class CoachForm implements Serializable {
 	@NotNull(message = Validacao.NOT_NULL)
 	private Long idGestor;
 	
+	private Long idSquad;
+	
 	private boolean reiniciarSenha;
 }

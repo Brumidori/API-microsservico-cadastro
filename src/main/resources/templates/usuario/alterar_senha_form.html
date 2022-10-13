@@ -23,7 +23,7 @@
 
 			<div class="row">
 				<div class="col-12">
-					<h5 class="text-center">alterar Senha</h5>
+					<h5 class="text-center">Alterar Senha</h5>
 				</div>
 
 				<div class="col-6 mt-3">
@@ -31,9 +31,9 @@
 						<div class="input-group-prepend">
 							<div class="input-group-text">*Nova Senha</div>
 						</div>
-						<input class="form-control" type="password" th:field="*{senha}" placeholder="senha">
+						<input id="input_senha" class="form-control" type="password" th:field="*{senha}" placeholder="senha">
 					</div>
-					<p class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('senha')}" th:text="${erro}"></p>
+					<p id="erro_input_senha" class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('senha')}" th:text="${erro}"></p>
 				</div>
 				
 				<div class="col-6 mt-3">
@@ -41,18 +41,18 @@
 						<div class="input-group-prepend">
 							<div class="input-group-text">*Confirme Senha</div>
 						</div>
-						<input class="form-control" type="password" th:field="*{senhaConfirma}" placeholder="senha">
+						<input id="input_senhaConfirma" class="form-control" type="password" th:field="*{senhaConfirma}" placeholder="senha">
 					</div>
-					<p class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('senhaConfirma')}" th:text="${erro}"></p>
+					<p id="erro_input_senhaConfirma" class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('senhaConfirma')}" th:text="${erro}"></p>
 				</div>				
 			</div>
 
 			<div class="row justify-content-end">
 				<div class="col-auto mt-3">
-					<a class="btn btn-secondary" href="/home">Cancelar</a>
+					<a id="button_cancelar" class="btn btn-secondary" href="/home">Cancelar</a>
 				</div>
 				<div class="col-auto mt-3">
-					<button class="btn btn-primary" formmethod="post" type="submit" th:formaction="@{/usuario/alterar/senha}">alterar</button>
+					<button id="button_alterar"  class="btn btn-primary" formmethod="post" type="submit" th:formaction="@{/usuario/alterar/senha}">Alterar</button>
 				</div>
 			</div>
 		</form>

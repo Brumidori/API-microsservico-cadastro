@@ -32,4 +32,5 @@ public class StartRelatorioDto implements Serializable {
 	private CoachDto coach;
 	private GestorDto gestor;
 	private TurmaDto turma;
+	private SquadDto squad;
 }

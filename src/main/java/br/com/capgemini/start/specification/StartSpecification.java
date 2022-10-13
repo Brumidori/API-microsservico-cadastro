@@ -64,10 +64,28 @@ public class StartSpecification implements SpecificationTemplate <Start>{
 		return this;
 	}
 	
-	public StartSpecification nomeTurma(String nomeTurma) {
-		if(StringUtils.isNotBlank(nomeTurma)) {
+	public StartSpecification idTurma(Long idTurma) {
+		if(idTurma != null) {
 			specifications.add((root, criteriaQuery, criteriaBuilder) -> 
-				criteriaBuilder.like(criteriaBuilder.upper(root.get("turma").get("nome")), "%" + nomeTurma.toUpperCase() + "%"));
+				criteriaBuilder.equal(root.get("turma").get("id"), idTurma));
+		}
+			
+		return this;
+	}
+	
+	public StartSpecification idSquad(Long idSquad) {
+		if(idSquad != null) {
+			specifications.add((root, criteriaQuery, criteriaBuilder) -> 
+				criteriaBuilder.equal(root.get("squad").get("id"), idSquad));
+		}
+			
+		return this;
+	}
+	
+	public StartSpecification billable(boolean billable) {
+		if(billable) {
+			specifications.add((root, criteriaQuery, criteriaBuilder) -> 
+				criteriaBuilder.equal(root.get("billable"), billable));
 		}
 			
 		return this;

@@ -43,6 +43,9 @@ public class CoachService {
 		CoachForm form =  mapper.map(coach, CoachForm.class);
 		form.setIdGestor(coach.getGestor().getId());
 		form.setAdm(coach.getPermissao().isAdm());
+		if(coach.getSquad() != null) {
+			form.setIdSquad(coach.getSquad().getId());
+		}
 		
 		return form;
 	}

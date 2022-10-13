@@ -20,4 +20,9 @@ public class GraficoController {
 	public byte[] startAvaliacoes(@RequestParam(value="idStart") Long idStart) {
 		return service.startAvaliacoes(idStart);
 	}
+	
+	@GetMapping(value="start/pizza/farois/turma", produces=MediaType.IMAGE_PNG_VALUE)
+	public byte[] startPizzaFaroisTurma(@RequestParam(value="idTurma") Long idTurma) {
+		return service.startPizzaFaroisTurma(idTurma);
+	}
 }

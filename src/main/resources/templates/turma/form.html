@@ -32,18 +32,18 @@
 						<div class="input-group-prepend">
 							<div class="input-group-text">*Nome</div>
 						</div>
-						<input class="form-control" type="text" th:field="*{nome}" placeholder="nome">
+						<input id="input_nome" class="form-control" type="text" th:field="*{nome}" placeholder="nome">
 					</div>
-					<p class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('nome')}" th:text="${erro}"></p>
+					<p id="erro_input_nome" class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('nome')}" th:text="${erro}"></p>
 				</div>
 			</div>
 
 			<div class="row justify-content-end">
 				<div class="col-auto mt-3">
-					<a class="btn btn-secondary" href="/home">Cancelar</a>
+					<a id="button_cancelar" class="btn btn-secondary" href="/home">Cancelar</a>
 				</div>
 				<div class="col-auto mt-3">
-					<button class="btn btn-primary" formmethod="post" type="submit" th:formaction="@{/turma}">Salvar</button>
+					<button id="button_salvar" class="btn btn-primary" formmethod="post" type="submit" th:formaction="@{/turma}">Salvar</button>
 				</div>
 			</div>
 		</form>

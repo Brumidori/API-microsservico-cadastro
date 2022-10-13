@@ -56,5 +56,7 @@ public class StartForm implements Serializable {
 	@NotNull(message = Validacao.NOT_NULL)
 	private Long idTurma;
 	
+	private Long idSquad;
+	
 	private boolean reiniciarSenha;
 }

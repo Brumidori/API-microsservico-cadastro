@@ -23,6 +23,7 @@ import br.com.capgemini.start.repository.CoachRepository;
 import br.com.capgemini.start.repository.EntrevistaNegocioRepository;
 import br.com.capgemini.start.repository.EntrevistaTecnicaRepository;
 import br.com.capgemini.start.repository.GestorRepository;
+import br.com.capgemini.start.repository.SquadRepository;
 import br.com.capgemini.start.repository.StartRepository;
 import br.com.capgemini.start.repository.TurmaRepository;
 import br.com.capgemini.start.specification.StartSpecification;
@@ -59,6 +60,9 @@ public class StartService {
 	private TurmaRepository turmaRepository;
 	
 	@Autowired
+	private SquadRepository squadRepository;
+	
+	@Autowired
 	private ModelMapper mapper;
 	
 	@Autowired
@@ -80,6 +84,9 @@ public class StartService {
 		}
 		form.setIdGestor(start.getGestor().getId());
 		form.setIdTurma(start.getTurma().getId());
+		if(start.getSquad() != null) {
+			form.setIdSquad(start.getSquad().getId());
+		}
 		
 		return form;
 	}
@@ -112,6 +119,9 @@ public class StartService {
 		} 
 		start.setGestor(gestorRepository.findById(form.getIdGestor()).orElseThrow(()-> new ErroInternoException("Gestor não encontrado ao salvar um Start")));
 		start.setTurma(turmaRepository.findById(form.getIdTurma()).orElseThrow(()-> new ErroInternoException("Turma não encontrada ao salvar um Start")));
+		if(form.getIdSquad() != null) {
+			start.setSquad(squadRepository.findById(form.getIdSquad()).orElseThrow(()-> new ErroInternoException("Squad não encontrada ao salvar um Start")));
+		}
 		
 		log.info("salvar entity={}", start);
 		
@@ -146,7 +156,9 @@ public class StartService {
 				.atuacao(form.getAtuacao())
 				.nomeCoach(form.getNomeCoach())
 				.nomeGestor(form.getNomeGestor())
-				.nomeTurma(form.getNomeTurma())
+				.idTurma(form.getIdTurma())
+				.idSquad(form.getIdSquad())
+				.billable(form.isBillable())
 				.specification();
 		
 		List<Start> starts = optional.isPresent() ? repository.findAll(optional.get(), SORT) : repository.findAll(SORT);

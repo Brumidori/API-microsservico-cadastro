@@ -37,7 +37,7 @@
 								<div class="input-group-prepend">
 									<div class="input-group-text">*Usuário</div>
 								</div>
-								<input id="input.usuario" class="form-control" type="text" name="username" placeholder="usuário">
+								<input id="input_usuario" id="input.usuario" class="form-control" type="text" name="username" placeholder="usuário">
 							</div>
 						</div>
 						<div class="col-12 mt-3">
@@ -45,15 +45,15 @@
 								<div class="input-group-prepend">
 									<div class="input-group-text">*Senha</div>
 								</div>
-								<input id="input.senha" class="form-control" type="password" name="password" placeholder="senha">
+								<input id="input_senha" class="form-control" type="password" name="password" placeholder="senha">
 							</div>
-							<p id="input.erro" th:if="${erro != null}" class="alert alert-danger text-center ml-2 p-0 mt-2">"Usuário ou Senha inválidos !!!"</p>
+							<p id="erro" th:if="${erro != null}" class="alert alert-danger text-center ml-2 p-0 mt-2">"Usuário ou Senha inválidos !!!"</p>
 						</div>
 					</div>
 					
 					<div class="row justify-content-end">
 						<div class="col-auto mt-3">
-							<button id="button.logar" class="btn btn-primary" formmethod="post" type="submit" th:formaction="@{/login}">Logar</button>
+							<button id="button_logar" class="btn btn-primary" formmethod="post" type="submit" th:formaction="@{/login}">Logar</button>
 						</div>
 					</div>
 				</form>

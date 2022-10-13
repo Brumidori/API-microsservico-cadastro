@@ -15,4 +15,6 @@ public interface StartRepository extends JpaRepository<Start, Long> , JpaSpecifi
 	List<Start> findAllByGestor_id(Long idGestor, Sort sort);
 	
 	List<Start> findAllByCoach_id(Long idCoach, Sort sort);
+	
+	List<Start> findAllByTurma_id(Long idTurma);
 }

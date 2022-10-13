@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import br.com.capgemini.start.model.Coach;
 import br.com.capgemini.start.model.dto.CoachDto;
 import br.com.capgemini.start.model.dto.GestorDto;
+import br.com.capgemini.start.model.dto.SquadDto;
 
 @Component
 public class CoachFactory {
@@ -26,6 +27,9 @@ public class CoachFactory {
 		
 		dto.setGestor(mapper.map(coach.getGestor(), GestorDto.class));
 		dto.setCor(coach.getGestor().getCor());
+		if(coach.getSquad() != null) {
+			dto.setSquad(mapper.map(coach.getSquad(), SquadDto.class));
+		}
 		
 		return dto;
 	}

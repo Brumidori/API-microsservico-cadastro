@@ -30,4 +30,8 @@ public class Coach extends Usuario {
 	@JoinColumn(name = "id_gestor")
 	@ManyToOne
 	private Gestor gestor;
+	
+	@JoinColumn(name = "id_squad")
+	@ManyToOne
+	private Squad squad;
 }

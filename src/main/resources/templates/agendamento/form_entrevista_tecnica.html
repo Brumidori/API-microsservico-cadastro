@@ -33,21 +33,21 @@
 						<div class="input-group-prepend">
 							<div class="input-group-text">Coach</div>
 						</div>
-						<select class="form-control" name="idCoachEntrevista">
+						<select id="select_coach" class="form-control" name="idCoachEntrevista">
 							<option th:value="${null}" th:selected="${form.idCoachEntrevista == null}">Escolha um...</option>
 							<option th:each="e : ${coachs}" th:value="${e.id}" th:text="${e.nome}" th:selected="${e.id == form.idCoachEntrevista}"></option>
 						</select>
 					</div>
-					<p class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('idCoachEntrevista')}" th:text="${erro}"></p>
+					<p id="erro_select_coach" class="text-danger text-center m-0 p-0" th:each="erro : ${#fields.errors('idCoachEntrevista')}" th:text="${erro}"></p>
 				</div>
 			</div>
 
 			<div class="row justify-content-end">
 				<div class="col-auto mt-3">
-					<a class="btn btn-secondary" href="/home">Cancelar</a>
+					<a id="button_cancelar" class="btn btn-secondary" href="/home">Cancelar</a>
 				</div>
 				<div class="col-auto mt-3">
-					<button class="btn btn-primary" formmethod="post" type="submit" th:formaction="@{/agendamento/entrevista/tecnica}">Agendar</button>
+					<button id="button_salvar" class="btn btn-primary" formmethod="post" type="submit" th:formaction="@{/agendamento/entrevista/tecnica}">Agendar</button>
 				</div>
 			</div>
 		</form>

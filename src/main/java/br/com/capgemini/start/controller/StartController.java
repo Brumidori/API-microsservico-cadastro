@@ -27,6 +27,7 @@ import br.com.capgemini.start.model.form.ListaStartForm;
 import br.com.capgemini.start.model.form.StartForm;
 import br.com.capgemini.start.service.CoachService;
 import br.com.capgemini.start.service.GestorService;
+import br.com.capgemini.start.service.SquadService;
 import br.com.capgemini.start.service.StartService;
 import br.com.capgemini.start.service.TurmaService;
 import br.com.capgemini.start.validation.StartValidator;
@@ -42,13 +43,16 @@ public class StartController {
 	private StartService service;
 	
 	@Autowired
-	private TurmaService turmaService;
-	
-	@Autowired
 	private CoachService coachService;
 	
 	@Autowired
 	private GestorService gestorService;
+	
+	@Autowired
+	private TurmaService turmaService;
+	
+	@Autowired
+	private SquadService squadService;
 	
 	@Autowired
 	private StartValidator validator;
@@ -60,9 +64,10 @@ public class StartController {
 		return formFactory.newModelAndView(FUNCIONALIDADE + "/form")
 				.addObject("form", form)
 				.addObject("atuacoes", Atuacao.values())
-				.addObject("turmas", turmaService.listar())
 				.addObject("gestores", gestorService.listar())
-				.addObject("coachs", form.getIdGestor() != null ? coachService.listarGestor(form.getIdGestor()) : new ArrayList<>());
+				.addObject("coachs", form.getIdGestor() != null ? coachService.listarGestor(form.getIdGestor()) : new ArrayList<>())
+				.addObject("turmas", turmaService.listar())
+				.addObject("squads", squadService.listar());
 	}
 	
 	private ModelAndView formLista(ListaStartForm form) {
@@ -70,16 +75,9 @@ public class StartController {
 				.addObject("form", form)
 				.addObject("lista", service.listar(form))
 				.addObject("atuacoes", Atuacao.values())
-				.addObject("farois", Farol.valores());
-	}
-	
-	public ModelAndView formLista() {
-		ListaStartForm form = new ListaStartForm();
-		
-		return formFactory.newModelAndView(FUNCIONALIDADE + "/lista")
-				.addObject("form", form)
-				.addObject("lista", service.listar(form))
-				.addObject("atuacoes", Atuacao.values());
+				.addObject("farois", Farol.valores())
+				.addObject("turmas", turmaService.listar())
+				.addObject("squads", squadService.listar());
 	}
 	
 	private StartForm model() {
