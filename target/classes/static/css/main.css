@@ -1,6 +1,8 @@
-.main-bg-roxo {background-color: #32003B !important;}
-.main-bg-azul {background-color: #007EB9 !important;}
-.main-bg-azul-claro {background-color: #00BAE9 !important;}
+.main-bg-castanho {background-color: #4F2020 !important;}
+.main-bg-amarelo {background-color: #FFFF99 !important;}
+.main-bg-rosa {background-color: #FF96C5 !important;}
+.main-bg-castanho-cachorro {background-color: #B55040 !important;}
+.main-bg-laranja-gato {background-color: #F97E2B !important;}
 .main-bg-branco {background-color: #FFFFFF !important;}
 .main-bg-preto-90 {background-color: #1A1A1A !important;}
 .main-bg-preto-80 {background-color: #333333 !important;}
@@ -17,9 +19,11 @@
 
 .main-bg-gradient {background-image: linear-gradient(#999999, #FFFFFF);}
 
-.main-text-roxo {color: #32003B !important;}
-.main-text-azul {color: #007EB9 !important;}
-.main-text-azul-claro {color: #00BAE9 !important;}
+.main-text-castanho {color: #4F2020 !important;}
+.main-text-amarelo {color: #FFFF99 !important;}
+.main-text-rosa {color: #FF96C5 !important;}
+.main-text-castanho-cachorro {color: #B55040 !important;}
+.main-text-laranja-gato {color: #F97E2B !important;}
 .main-text-branco {color: #FFFFFF !important;}
 .main-text-preto-90 {color: #1A1A1A !important;}
 .main-text-preto-80 {color: #333333 !important;}
@@ -34,9 +38,11 @@
 .main-text-preto-15 {color: #D8D8D8 !important;}
 .main-text-preto-05 {color: #F2F2F2 !important;}
 
-.main-border-roxo {border-color: #32003B !important; border: 1.2px; border-style: solid;}
-.main-border-azul {border-color: #007EB9 !important; border: 1.2px; border-style: solid;}
-.main-border-azul-claro {border-color: #00BAE9 !important; border: 1.2px; border-style: solid;}
+.main-border-castanho {border-color: #4F2020 !important; border: 1.2px; border-style: solid;}
+.main-border-amarelo {border-color: #FFFF99 !important; border: 1.2px; border-style: solid;}
+.main-border-rosa {border-color: #FF96C5 !important; border: 1.2px; border-style: solid;}
+.main-border-castanho-cachorro {border-color: #B55040 !important; border: 1.2px; border-style: solid;}
+.main-border-laranja-gato {border-color: #F97E2B !important; border: 1.2px; border-style: solid;}
 .main-border-branco {border-color: #FFFFFF !important; border: 1.2px; border-style: solid;}
 .main-border-preto-90 {border-color: #1A1A1A !important; border: 1.2px; border-style: solid;}
 .main-border-preto-80 {border-color: #333333 !important; border: 1.2px; border-style: solid;}
