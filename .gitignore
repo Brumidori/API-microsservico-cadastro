@@ -22,4 +22,30 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-/target
+.classpath
+.project
+.settings/
+target/
+
+# Spring boot files
+/bin/
+/src/main/resources/application.properties
+
+# Generated files
+/target/
+/src/generated/
+
+# Gradle files
+/build/
+/gradle/
+/out/
+
+# Log files
+*.log
+
+# Local database files
+*.mv.db
+
+# OS generated files
+.DS_Store
+Thumbs.db
