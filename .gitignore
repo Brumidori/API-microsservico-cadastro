@@ -35,9 +35,9 @@ target/
 /target/
 /src/generated/
 
-# Gradle files
+
 /build/
-/gradle/
+/maven/
 /out/
 
 # Log files
