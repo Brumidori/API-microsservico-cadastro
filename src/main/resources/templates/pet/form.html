@@ -9,7 +9,7 @@
 	<script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
 	<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
-	<link href="css/main.css" rel="stylesheet" />
+	<link href="/css/main.css" rel="stylesheet" />
 </head>
 
 <body class="main-bg-amarelo">
@@ -40,7 +40,11 @@
 						<div class="input-group-prepend">
 							<label class="input-group-text">*Especie:</label>
 						</div>
-						<input class="form-control" type="text" th:field="*{especie}" placeholder="especie">
+						<select id="select_atuacao" class="form-control" name="especie">
+							<option th:value="${null}" th:selected="${model.especie == null}">Selecione a especie</option>
+							<option th:each="e : ${especies}" th:value="${e.id}" th:text="${e.nome}"
+								th:selected="${e.equals(model.especie)}"></option>
+						</select>
 					</div>
 				</div>
 
@@ -117,7 +121,7 @@
 				<div class="row justify-content-end">
 					<div class="col-auto mt-3">
 						<button id="button_salvar" class="btn btn-primary" formmethod="post" type="submit"
-							th:formaction="@{/form}">Salvar</button>
+							th:formaction="@{/pet/form}">Salvar</button>
 					</div>
 				</div>
 		</form>

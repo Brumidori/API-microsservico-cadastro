@@ -10,6 +10,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
@@ -42,10 +44,10 @@ public class Pet {
 	@Column(nullable= false, length = 100)
 	private String nome;
 	
-	@NotBlank(message="obrigatório")
-	@Size(min=0, max=100, message="máximo 100 caracteres")
-	@Column(nullable= false, length = 100)
-	private String especie;
+	@ManyToOne
+	@NotNull(message="obrigatório")
+	@JoinColumn(nullable= false, name = "especie_id")
+	private Especie especie;
 	
 	@NotBlank(message="obrigatório")
 	@Size(min=0, max=100, message="máximo 100 caracteres")

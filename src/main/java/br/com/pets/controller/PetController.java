@@ -16,23 +16,27 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.pets.model.Pet;
 import br.com.pets.model.Sexo;
+import br.com.pets.service.EspecieService;
 import br.com.pets.service.PetService;
 
 @Controller
-@RequestMapping()
+@RequestMapping("pet")
 public class PetController {
 	
 	@Autowired
 	private PetService service;
+	@Autowired
+	private EspecieService especieService;
 
 	private ModelAndView form(Pet model) {
-		return new ModelAndView("form")
+		return new ModelAndView("pet/form")
 				.addObject("model", model)
+				.addObject("especies", especieService.listar())
 				.addObject("sexos", Sexo.values());		
 	}
 	
 	private ModelAndView form(List<Pet> lista) {
-		return new ModelAndView("table")
+		return new ModelAndView("pet/table")
 				.addObject("lista", lista);
 	}
 	
@@ -44,7 +48,7 @@ public class PetController {
 	@PostMapping("form")
 	public ModelAndView salvar(@ModelAttribute("model") @Valid Pet model, BindingResult result) {
 		if(result.hasErrors()) {
-			return form(model);
+			return form(model); //devolve os dados preenchidos
 		}
 		
 		service.salvar(model);

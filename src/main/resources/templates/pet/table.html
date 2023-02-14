@@ -4,7 +4,7 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no" charset="utf-8">
 	<title>Pets</title>
-	<link href="css/main.css" rel="stylesheet" />
+	<link href="/css/main.css" rel="stylesheet" />
 
 	<!-- BOOTSTRAP -->
 	<script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
@@ -43,7 +43,7 @@
 					<tbody>
 						<tr th:each="item : ${lista}">
 							<td th:text="${item.nome}" />
-							<td th:text="${item.especie}" />
+							<td th:text="${item.especie.nome}" />
 							<td th:text="${item.sexo}" />
 							<td th:text="${item.dono}" />
 							<td th:text="${item.raca}" />
@@ -55,8 +55,8 @@
 							<td class="text-center align-middle"
 								th:text="${item.ultimoAntiPulga != null ? #temporals.format(item.ultimoAntiPulga, 'dd/MM/yyyy') : ''}"
 								scope="row" />
-							<td class="text-center align-middle"><a class="btn btn btn-warning btn-sm" th:href="@{/form(id=${item.id})}">Editar</a></td>
-							<td class="text-center align-middle"><a class="btn btn btn-danger btn-sm" th:href="@{/excluir(id=${item.id})}">Excluir</a></td>
+							<td class="text-center align-middle"><a class="btn btn btn-warning btn-sm" th:href="@{/pet/form(id=${item.id})}">Editar</a></td>
+							<td class="text-center align-middle"><a class="btn btn btn-danger btn-sm" th:href="@{/pet/excluir(id=${item.id})}">Excluir</a></td>
 						</tr>
 					</tbody>
 				</table>

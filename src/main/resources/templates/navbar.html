@@ -17,7 +17,7 @@
 	<section th:fragment="navbar">
 
 		<nav class="navbar navbar-expand-lg navbar-light justify-content-between shadow-sm rounded">
-			<a class="navbar-brand main-text-castanho" href="#"><img class="w-25" src="imagens/dog.png"><span
+			<a class="navbar-brand main-text-castanho" href="#"><img class="w-25" src="/imagens/dog.png"><span
 					class="h2"> Pets</span></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
 				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,8 +33,17 @@
 							id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true"
 							aria-expanded="false"> Pet </a>
 						<div class="dropdown-menu main-bg-amarelo" aria-labelledby="navbarDropdownMenuLink">
-							<a class="dropdown-item main-text-castanho" href="/form">Cadastro</a>
-							<a class="dropdown-item main-text-castanho" href="/listar">Lista</a>
+							<a class="dropdown-item main-text-castanho" href="/pet/form">Cadastro</a>
+							<a class="dropdown-item main-text-castanho" href="/pet/listar">Lista</a>
+						</div>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle main-text-castanho main-font-22" href="#"
+							id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="false"> Especie </a>
+						<div class="dropdown-menu main-bg-amarelo" aria-labelledby="navbarDropdownMenuLink">
+							<a class="dropdown-item main-text-castanho" href="/especie/form">Cadastrar</a>
+							<a class="dropdown-item main-text-castanho" href="/especie/listar">Lista de Especies</a>
 						</div>
 					</li>
 				</ul>
