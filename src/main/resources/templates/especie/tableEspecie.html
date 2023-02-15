@@ -33,7 +33,7 @@
 					</thead>
 
 					<tbody>
-						<tr th:each="item : ${lista}">
+						<tr th:each="item : ${lista}" th:style="${'background-color:' + item.cor.hexa}">
 							<td th:text="${item.nome}" />
 							
 							<td class="text-center align-middle"><a class="btn btn btn-warning btn-sm" th:href="@{/especie/form(id=${item.id})}">Editar</a></td>
@@ -43,7 +43,12 @@
 				</table>
 			</div>
 		</div>
+	<section th:insert="mensagem :: mensagem"></section>
 	</section>
+	
+	<script th:if="${sucesso != null || erro != null || alerta != null}" type="text/javascript">
+		$("#mensagem").modal("show");	
+	</script>	
 </body>
 
 </html>

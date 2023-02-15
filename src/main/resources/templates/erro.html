@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no" charset="utf-8">
+<title>Pets</title>
+
+<link href="css/main.css" rel="stylesheet" />
+
+<!-- WEBJARS -->
+<script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+</head>
+
+<body class="main-bg-amarelo">
+
+	<section th:insert="navbar :: navbar"></section>
+
+	<section class="container">
+		<div class="row justify-content-center">
+			<div class="col-12 col-md-6">
+				<div class="p-2 lab-border-verde-c-25 rounded">
+					<h3 class="text-center">Erro</h3>
+					<div class="p-2 lab-border-verde-c-25 rounded">
+						<div th:each="erro : ${erros}">
+							<p class="text-danger text-center" th:text="${erro}"></p>
+							<br>
+						</div>
+						<h4 th:if="${statusCode != null}" class="text-center" th:text="${statusCode}"></h4>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

@@ -2,23 +2,25 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no" charset="utf-8">
-	<title>Pets</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no" charset="utf-8">
+<title>Pets</title>
 
-	<!-- WEBJARS -->
-	<script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
-	<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
-	<link href="/css/main.css" rel="stylesheet" />
+<link href="/css/main.css" rel="stylesheet" />
+
+<!-- WEBJARS -->
+<script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
 </head>
 
 <body class="main-bg-amarelo">
-
+		<!-- Barra de Menu -->
 	<section th:insert="navbar :: navbar"></section>
-
+	
 	<section class="container">
 		<form class="shadow-sm rounded mt-4 mb-2 p-2" enctype="multipart/form-data" th:object="${model}">
-			<input type="hidden" th:field="*{id}" />
+			<input type="hidden" th:field="*{id}">
+			
 			<div class="row">
 				<div class="col-12">
 					<h5 class="text-center main-text-castanho">Cadastro de Pets</h5>
@@ -29,103 +31,112 @@
 				<div class="col-12 mt-3">
 					<div class="input-group input-group">
 						<div class="input-group-prepend">
-							<div class="input-group-text">*Nome:</div>
+							<label class="input-group-text" for="nome">Nome:</label>
 						</div>
-						<input class="form-control" type="text" th:field="*{nome}" placeholder="nome">
+						<input class="form-control" type="text" id="nome" name="nome" th:field="*{nome}" >
 					</div>
+					<p class="text-danger m-0 p-0" th:each="erro : ${#fields.errors('nome')}" th:text="${erro}"></p>
 				</div>
 
 				<div class="col-6 mt-1">
 					<div class="input-group input-group">
 						<div class="input-group-prepend">
-							<label class="input-group-text">*Especie:</label>
+							<label class="input-group-text" for="especie">Especie:</label>
 						</div>
-						<select id="select_atuacao" class="form-control" name="especie">
-							<option th:value="${null}" th:selected="${model.especie == null}">Selecione a especie</option>
-							<option th:each="e : ${especies}" th:value="${e.id}" th:text="${e.nome}"
-								th:selected="${e.equals(model.especie)}"></option>
+						<select id="select_at" class="form-control" name="especie">
+							<option th:value="${null}" th:selected="${model.especie == null}">Escolha um...</option>
+							<option th:each="e : ${especies}" th:value="${e.id}" th:text="${e.nome}" th:selected="${e.equals(model.especie)}"></option>
 						</select>
 					</div>
+					<p id="erro_select_at" class="text-danger m-0 p-0" th:each="erro : ${#fields.errors('especie')}" th:text="${erro}"></p>
+					
 				</div>
-
+				
 				<div class="col-6 mt-1">
 					<div class="input-group input-group">
 						<div class="input-group-prepend">
-							<label class="input-group-text">Sexo:</label>
-						</div>
+							<label class="input-group-text" for="sexo">Sexo:</label>
+					</div>
 						<select id="select_atuacao" class="form-control" name="sexo">
 							<option th:value="${null}" th:selected="${model.sexo == null}">Escolha um...</option>
-							<option th:each="e : ${sexos}" th:value="${e}" th:text="${e}"
-								th:selected="${e.equals(model.sexo)}"></option>
+							<option th:each="e : ${sexos}" th:value="${e}" th:text="${e}" th:selected="${e.equals(model.sexo)}"></option>
 						</select>
 					</div>
+					<p id="erro_select_atuacao" class="text-danger m-0 p-0" th:each="erro : ${#fields.errors('sexo')}" th:text="${erro}"></p>
 				</div>
 
 				<div class="col-6 mt-1">
 					<div class="input-group input-group">
 						<div class="input-group-prepend">
-							<label class="input-group-text">Dono:</label>
+							<label class="input-group-text" for="dono">Dono:</label>
 						</div>
-						<input class="form-control" type="text" th:field="*{dono}" placeholder="dono" required>
+						<input class="form-control" type="text" id="dono" name="dono" th:field="*{dono}" >
 					</div>
+					<p class="text-danger m-0 p-0" th:each="erro : ${#fields.errors('dono')}" th:text="${erro}"></p>
 				</div>
 
 				<div class="col-6 mt-1">
 					<div class="input-group input-group">
 						<div class="input-group-prepend">
-							<label class="input-group-text">Última Vacina:</label>
+							<label class="input-group-text" for="date">Última Vacina:</label>
 						</div>
-						<input class="form-control" type="date" th:field="*{ultimaVacina}" placeholder="ultima Vacina">
+						<input class="form-control" type="date" id="date" name="vacina" th:field="*{ultimaVacina}">
 					</div>
+					<p class="text-danger m-0 p-0" th:each="erro : ${#fields.errors('ultimaVacina')}" th:text="${erro}"></p>
 				</div>
 
 				<div class="col-6 mt-1">
 					<div class="input-group input-group">
 						<div class="input-group-prepend">
-							<label class="input-group-text">Raça:</label>
+							<label class="input-group-text" for="raca">Raça:</label>
 						</div>
-						<input class="form-control" type="text" th:field="*{raca}" placeholder="raça" required>
+						<input class="form-control" type="text" id="raca" name="raca" th:field="*{raca}" >
 					</div>
+					<p class="text-danger m-0 p-0" th:each="erro : ${#fields.errors('raca')}" th:text="${erro}"></p>
 				</div>
 
 				<div class="col-6 mt-1">
 					<div class="input-group input-group">
 						<div class="input-group-prepend">
-							<label class="input-group-text">Peso (Kg):</label>
+							<label class="input-group-text" for="peso">Peso (Kg):</label>
 						</div>
-						<input class="form-control" type="number" min="0" step="0.1" th:field="*{peso}"
-							placeholder="peso">
+						<input class="form-control" type="number" th:field="*{peso}" id="peso" name="peso" min="0" step="0.1">
 					</div>
+					<p class="text-danger m-0 p-0" th:each="erro : ${#fields.errors('peso')}" th:text="${erro}"></p>
 				</div>
 
 				<div class="col-6 mt-1">
 					<div class="input-group input-group">
 						<div class="input-group-prepend">
-							<label class="input-group-text">Telefone (DDD):</label>
+							<label class="input-group-text" for="phone">Telefone (DDD):</label>
 						</div>
-						<input class="form-control" type="tel" th:field="*{telDono}" placeholder="telefone" required>
+						<input class="form-control" type="tel" id="phone" name="telefone" th:field="*{telDono}" pattern="[0-9]{2}[0-9]{5}[0-9]{4}" >
 					</div>
+					<p class="text-danger m-0 p-0" th:each="erro : ${#fields.errors('telDono')}" th:text="${erro}"></p>
 				</div>
 
 				<div class="col-6 mt-1">
 					<div class="input-group input-group">
 						<div class="input-group-prepend">
-							<label class="input-group-text">Último Antipulga:</label>
+							<label class="input-group-text" for="date">Último AntiPulga:</label>
 						</div>
-						<input class="form-control" type="date" th:field="*{ultimoAntiPulga}"
-							placeholder="ultima Vacina">
+						<input class="form-control" type="date" id="date" name="antipulga" th:field="*{ultimoAntiPulga}">
 					</div>
+					<p class="text-danger m-0 p-0" th:each="erro : ${#fields.errors('ultimoAntiPulga')}" th:text="${erro}"></p>
 				</div>
 			</div>
 
-				<div class="row justify-content-end">
-					<div class="col-auto mt-3">
-						<button id="button_salvar" class="btn btn-primary" formmethod="post" type="submit"
-							th:formaction="@{/pet/form}">Salvar</button>
-					</div>
+			<div class="row justify-content-end">
+				<div class="col-auto mt-3">
+					<button class="btn btn-primary" type="submit" formmethod="post" th:formaction="@{/pet/form}">Salvar</button>
 				</div>
+			</div>
 		</form>
+	<section th:insert="mensagem :: mensagem"></section>
 	</section>
-
+	
+	<script th:if="${sucesso != null || erro != null || alerta != null}" type="text/javascript">
+		$("#mensagem").modal("show");	
+	</script>	
 
 </body>

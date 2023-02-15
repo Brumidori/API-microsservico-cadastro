@@ -19,6 +19,7 @@
 	<section class="container">
 		<form class="shadow-sm rounded mt-4 mb-2 p-2" enctype="multipart/form-data" th:object="${especieModel}">
 			<input type="hidden" th:field="*{id}" />
+			
 			<div class="row">
 				<div class="col-12">
 					<h5 class="text-center main-text-castanho">Cadastro de Especie</h5>
@@ -26,24 +27,45 @@
 			</div>
 
 			<div class="row">
-				<div class="col-12 mt-3">
+				<div class="col-6 mt-3">
 					<div class="input-group input-group">
 						<div class="input-group-prepend">
-							<div class="input-group-text">*Nome da especie:</div>
+							<label class="input-group-text">*Nome da especie:</label>
 						</div>
-						<input class="form-control" type="text" th:field="*{nome}" placeholder="nome">
+						<input class="form-control" type="text" th:field="*{nome}" id="nome" name="nome">
 					</div>
+					<p class="text-danger m-0 p-0" th:each="erro : ${#fields.errors('nome')}" th:text="${erro}"></p>
+				</div>
+				
+				<div class="col-6 mt-3">
+					<div class="input-group input-group">
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="cor">Cor:</label>
+						</div>
+						<select class="form-control" name="cor">
+							<option th:value="${null}" th:selected="${especieModel.cor == null}">Escolha uma...</option>
+							<option th:each="e : ${cores}" th:value="${e}" th:text="${e}"
+								th:selected="${e.equals(especieModel.cor)}" th:style="${'background-color:' + e.hexa}">
+							</option>
+						</select>
+					</div>
+					<p id="erro_select_at" class="text-danger m-0 p-0" th:each="erro : ${#fields.errors('cor')}"
+						th:text="${erro}"></p>
 				</div>
 			</div>
 
 			<div class="row justify-content-end">
 				<div class="col-auto mt-3">
 					<button id="button_salvar" class="btn btn-primary" formmethod="post" type="submit"
-						th:formaction="@{/especie}">Salvar</button>
+						th:formaction="@{/especie/form}">Salvar</button>
 				</div>
 			</div>
 		</form>
-	</section>
+		<section th:insert="mensagem :: mensagem"></section>
 
+	</section>
+	<script th:if="${sucesso != null || erro != null || alerta != null}" type="text/javascript">
+		$("#mensagem").modal("show");
+	</script>
 
 </body>

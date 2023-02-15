@@ -2,21 +2,21 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no" charset="utf-8">
-	<title>Pets</title>
-	<link href="/css/main.css" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no" charset="utf-8">
+<title>Pets</title>
 
-	<!-- BOOTSTRAP -->
-	<script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
-	<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<link href="/css/main.css" rel="stylesheet" />
 
+<!-- WEBJARS -->
+<script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
 </head>
 
 <body class="main-bg-amarelo">
-
+	<!-- Barra de Menu -->
 	<section th:insert="navbar :: navbar"></section>
-
+	
 	<section class="container">
 		<div class="row justify-content-center shadow-sm rounded mt-3 p-3">
 			<div class="col-12">
@@ -39,30 +39,31 @@
 							<th scope="col"></th>
 						</tr>
 					</thead>
-
 					<tbody>
-						<tr th:each="item : ${lista}">
-							<td th:text="${item.nome}" />
-							<td th:text="${item.especie.nome}" />
-							<td th:text="${item.sexo}" />
-							<td th:text="${item.dono}" />
-							<td th:text="${item.raca}" />
-							<td th:text="${item.peso != null ? item.peso + 'kg' : ''}" />
-							<td th:text="${item.telDono}" />
-							<td class="text-center align-middle"
-								th:text="${item.ultimaVacina != null ? #temporals.format(item.ultimaVacina, 'dd/MM/yyyy') : ''}"
-								scope="row" />
-							<td class="text-center align-middle"
-								th:text="${item.ultimoAntiPulga != null ? #temporals.format(item.ultimoAntiPulga, 'dd/MM/yyyy') : ''}"
-								scope="row" />
-							<td class="text-center align-middle"><a class="btn btn btn-warning btn-sm" th:href="@{/pet/form(id=${item.id})}">Editar</a></td>
-							<td class="text-center align-middle"><a class="btn btn btn-danger btn-sm" th:href="@{/pet/excluir(id=${item.id})}">Excluir</a></td>
+						<tr th:each="item : ${lista}" th:style="${'background-color:' + item.especie.cor.hexa}">
+							<td th:text="${item.nome}"/>
+							<td th:text="${item.Especie.nome}"/>
+							<td th:text="${item.sexo}"/>
+							<td th:text="${item.dono}"/>
+							<td th:text="${item.raca}"/>
+							<td th:text="${item.peso + 'kg'}"/>
+							<td th:text="${item.telDono}"/>
+							<td th:text="${item.ultimaVacina}"/>
+							<td th:text="${item.ultimoAntiPulga}"/>
+							<td class="text-center align-middle"><a class="btn btn btn-warning btn-sm">Editar</a></td>
+							<td class="text-center align-middle" scope="row">
+								<a class="btn btn btn-danger btn-sm" th:href="@{/pet/excluir(id=${item.id})}">Excluir</a>
+							</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 		</div>
+	<section th:insert="mensagem :: mensagem"></section>
 	</section>
-</body>
+	
+	<script th:if="${sucesso != null || erro != null || alerta != null}" type="text/javascript">
+		$("#mensagem").modal("show");	
+	</script>	
 
-</html>
+</body>
